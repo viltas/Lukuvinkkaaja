@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import ohtu.Lukuvinkkaaja.LukuVinkki;
+import ohtu.Lukuvinkkaaja.domain.LukuVinkki;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
