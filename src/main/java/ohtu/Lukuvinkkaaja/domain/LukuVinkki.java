@@ -1,4 +1,4 @@
-package ohtu.Lukuvinkkaaja;
+package ohtu.Lukuvinkkaaja.domain;
 
 import java.time.LocalDate;
 import java.util.Date;

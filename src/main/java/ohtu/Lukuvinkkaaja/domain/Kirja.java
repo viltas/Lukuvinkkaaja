@@ -3,30 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ohtu.Lukuvinkkaaja;
+package ohtu.Lukuvinkkaaja.domain;
 
 /**
  *
  * @author iilkka
  */
-public class Podcast {
-    private String author;
-    private String nimi;
+public class Kirja {
+    private String kirjoittaja;
     private String otsikko;
-    private String kuvaus;
     private String tyyppi;
+    private int ISBN;
     private String tagit;
     private String liittyvatKurssit;
     
-    public Podcast(String author, String nimi, String otsikko, String kuvaus, String tyyppi, String tagit, String liittyvatKurssit) {
-        this.author = author;
-        this.nimi = nimi;
-        this.otsikko = otsikko;
-        this.kuvaus = kuvaus;
+    
+    public Kirja (String kirjoittaja, String otsikko, String tyyppi, int ISBN, String tagit, String liittyvatKurssit) {
+                
+        this.kirjoittaja = kirjoittaja;
         this.tyyppi = tyyppi;
+        this.ISBN = ISBN;
         this.tagit = tagit;
         this.liittyvatKurssit = liittyvatKurssit;
+
     }
-  
-    
 }
