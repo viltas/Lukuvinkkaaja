@@ -7,3 +7,5 @@
 
 
 [![CircleCI](https://circleci.com/gh/viltas/Lukuvinkkaaja.svg?style=svg)](https://circleci.com/gh/viltas/Lukuvinkkaaja)
+[![codecov](https://codecov.io/gh/viltas/Lukuvinkkaaja/branch/master/graph/badge.svg)](https://codecov.io/gh/viltas/Lukuvinkkaaja)
+
