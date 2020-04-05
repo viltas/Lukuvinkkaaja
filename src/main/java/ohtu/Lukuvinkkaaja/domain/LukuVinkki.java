@@ -22,6 +22,9 @@ public class LukuVinkki {
     
     
     public LukuVinkki(String otsikko, String URL) {
+        if (otsikko == null || otsikko.isEmpty()) {
+            throw new IllegalArgumentException("Otsikko on pakollinen.");
+        }
        LocalDate pvm = LocalDate.now();
         this.otsikko = otsikko;
         this.URL = URL;
