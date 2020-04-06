@@ -50,6 +50,8 @@ public class KomentoriviUI {
                 lista.add(vinkki);
                 
                 System.out.println("Lukuvinkki tallennettu!");
+                System.out.println("");
+                System.out.println("");
             }
 
             if (komento.equalsIgnoreCase("L")) {
@@ -57,7 +59,10 @@ public class KomentoriviUI {
                 
                 for(LukuVinkki lukuvinkki : lista) {
                     System.out.println(lukuvinkki);
+                    System.out.println("");
                 }
+                
+                System.out.println("");
             }
 
         }
