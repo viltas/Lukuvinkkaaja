@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lukuvinkkaaja;
+package ohtu.Lukuvinkkaaja;
 
 import java.util.List;
 import ohtu.Lukuvinkkaaja.domain.LukuVinkki;

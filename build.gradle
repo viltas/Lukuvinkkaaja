@@ -4,24 +4,38 @@ apply plugin: 'application'
 
 apply plugin: "jacoco" 
 
-repositories {
-    jcenter()
+project.ext {
+	cucumberVersion = '4.7.4'
+        junitVersion = '4.12'
 }
 
-project.ext {
-	cucumberVersion = '1.2.5'
+
+repositories {
+    jcenter()
+    mavenCentral()    
+    
 }
+ 
+
 
 
 
 dependencies {
+
     compile 'com.google.guava:guava:28.1-jre'
     compile group: 'org.springframework', name: 'spring-core', version:'5.2.0.RELEASE'
     compile group: 'org.springframework', name: 'spring-context', version:'5.2.0.RELEASE'
     compile group: 'org.springframework', name: 'spring-context-support', version:'5.2.0.RELEASE'
-    compile group: 'org.springframework', name: 'spring-beans', version:'5.2.0.RELEASE'    
+    compile group: 'org.springframework', name: 'spring-beans', version:'5.2.0.RELEASE' 
+    testCompile 'io.cucumber:cucumber-java:' + cucumberVersion
+    testCompile 'io.cucumber:cucumber-junit:' + cucumberVersion
     testCompile 'junit:junit:4.12'
 
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
 }
 
 

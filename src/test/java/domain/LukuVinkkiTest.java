@@ -58,6 +58,14 @@ public class LukuVinkkiTest {
        LukuVinkki lukuV = new LukuVinkki(null,"https://www.lv.fi/");
 
     }
+    
+    @Test
+    public void listaaKaikkiLukuvinkit() {
+        LukuVinkki vinkki1 = new LukuVinkki("lukuvinkki1", "www.lukuvinkki1.com");
+        LukuVinkki vinkki2 = new LukuVinkki("lukuvinkki2", "www.lukuvinkki2.com");
+        
+        
+    }
 
 
 
