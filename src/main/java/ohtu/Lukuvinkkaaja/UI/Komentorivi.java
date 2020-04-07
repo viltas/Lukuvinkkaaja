@@ -16,6 +16,7 @@ public class Komentorivi {
     public void start() {
 
         aloitusViesti();
+        komentoListaa();
 
         while (true) {
 
@@ -57,6 +58,9 @@ public class Komentorivi {
 
         for (int i = 0; i < lista.size(); i++) {
             io.print(haeListalta(i).toString() + "\n");
+        }
+        if (lista.isEmpty()) {
+            io.print("Et ole vielä tallentanut lukuvinkkejä");
         }
 
         io.print("");
