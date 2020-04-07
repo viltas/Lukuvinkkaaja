@@ -33,7 +33,7 @@ public class KomentoriviTest {
     public void tallenninTyhjallaOtsikolla(){
         IOStub io = new IOStub("T", "","Q");
         new Komentorivi(io).start();
-        assertEquals("Otsikko on pakollinen", io.outputs.get(11));
+        assertEquals("Otsikko on pakollinen", io.outputs.get(14));
 
     }
 
@@ -41,7 +41,7 @@ public class KomentoriviTest {
     public void tallenninOtsikollajaTyhjallaLinkilla(){
         IOStub io = new IOStub("T", "Otsikko","","Q");
         new Komentorivi(io).start();
-        assertEquals("Lukuvinkki tallennettu!\n\n", io.outputs.get(12));
+        assertEquals("Lukuvinkki tallennettu!\n\n", io.outputs.get(15));
     }
 
     @Test
@@ -58,8 +58,8 @@ public class KomentoriviTest {
         new Komentorivi(io).start();
 
 
-        assertEquals("Otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now() + "\n", io.outputs.get(19));
-        assertEquals("Toinen" +" "+ "toka.fi" +" "+ LocalDate.now() + "\n", io.outputs.get(20));
+        assertEquals("Otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now() + "\n", io.outputs.get(22));
+        assertEquals("Toinen" +" "+ "toka.fi" +" "+ LocalDate.now() + "\n", io.outputs.get(23));
 
     }
 
