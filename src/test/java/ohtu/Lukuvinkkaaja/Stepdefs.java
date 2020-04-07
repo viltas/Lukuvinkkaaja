@@ -10,15 +10,12 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.List;
+import java.time.LocalDate;
 import ohtu.Lukuvinkkaaja.UI.Komentorivi;
 import ohtu.Lukuvinkkaaja.UI.KomentoriviIO;
 import ohtu.Lukuvinkkaaja.domain.LukuVinkki;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-
 
 /**
  *
@@ -31,6 +28,7 @@ public class Stepdefs {
     private final PrintStream originalErr = System.err;
     Komentorivi komentorivi;
     LukuVinkki lukuVinkki;
+    LocalDate pvm;
     
     
     @Before
@@ -38,6 +36,7 @@ public class Stepdefs {
         lukuVinkki = new LukuVinkki("otsikko","www.lukuvinkki.com");
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
+        pvm = LocalDate.now();
     }
     
     @Given("LukuVinkki is added")
@@ -59,22 +58,27 @@ public class Stepdefs {
     public void uiIsRunning() {
         komentorivi  = new Komentorivi(new KomentoriviIO());
     }
-
+    
     @When("tips are listed")
     public void tipsAreListed() {
-        komentorivi.komentoListaa();
-
+        komentorivi.komentoListaa();      
     }
 
-    @Then("no tips are shown")
-    public void noTipsAreShown() {
-        assertEquals("...\n\n", outContent.toString());
-
+    @Then("empty list is shown")
+    public void emptyListIsShown() {
+        assertEquals("...\nEt ole vielä tallentanut lukuvinkkejä\n\n", outContent.toString());
     }
 
     @Then("tip is listed")
     public void tipIsListed() {
-        assertEquals("...\notsikko www.otsikko.com 2020-04-07\n\n\n", outContent.toString());        
+        assertEquals("...\notsikko www.otsikko.com " + pvm + "\n\n\n", outContent.toString());
     }
+    
+    @After
+    public void restoreStreams() {
+        System.setOut(originalOut);
+        System.setErr(originalErr);
+    }
+
 
 }
