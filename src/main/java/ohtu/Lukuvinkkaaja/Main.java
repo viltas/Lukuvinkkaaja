@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 package ohtu.Lukuvinkkaaja;
-import java.util.Scanner;
-import ohtu.Lukuvinkkaaja.UI.KomentoriviUI;
+
+import ohtu.Lukuvinkkaaja.UI.Komentorivi;
+import ohtu.Lukuvinkkaaja.UI.KomentoriviIO;
 
 /**
  *
@@ -14,8 +15,7 @@ import ohtu.Lukuvinkkaaja.UI.KomentoriviUI;
 public class Main {
     
     public static void main(String[] args) {
-        Scanner lukija = new Scanner(System.in);
-        KomentoriviUI komentoriviUI = new KomentoriviUI(lukija);
-        komentoriviUI.start();
+        Komentorivi komentorivi = new Komentorivi(new KomentoriviIO());
+        komentorivi.start();
     }
 }
