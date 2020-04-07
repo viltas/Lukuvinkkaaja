@@ -27,11 +27,11 @@ public class Komentorivi {
             }
 
             if (komento.equalsIgnoreCase("T")) {
-                tallenna();
+                komentoTallenna();
             }
 
             if (komento.equalsIgnoreCase("L")) {
-                listaa();
+                komentoListaa();
             }
 
         }
@@ -39,42 +39,57 @@ public class Komentorivi {
     }
 
     public void aloitusViesti() {
-        System.out.println("Tervetuloa lukuvinkkaajaan!");
-        System.out.println("---------------------------");
-        System.out.println("---------------------------");
-        System.out.println("---------------------------");
+        io.print("Tervetuloa lukuvinkkaajaan!");
+        io.print("---------------------------");
+        io.print("---------------------------");
+        io.print("---------------------------");
 
-        System.out.println("Tallenna uusi linkki: T");
-        System.out.println("Listaa linkit: L");
-        System.out.println("Lopeta: Q");
-        System.out.println("---------------------------");
-        System.out.println("");
+        io.print("Tallenna uusi lukuvinkki: T");
+        io.print("Listaa lukuvinkit: L");
+        io.print("Lopeta: Q");
+        io.print("---------------------------");
+        io.print("");
     }
 
-    public void listaa() {
-        System.out.println("...");
+    public void komentoListaa() {
+        io.print("...");
 
-        for (LukuVinkki lukuvinkki : lista) {
-            System.out.println(lukuvinkki);
-            System.out.println("");
+
+        for (int i = 0; i < lista.size(); i++) {
+            io.print(haeListalta(i).toString() + "\n");
         }
 
-        System.out.println("");
+        io.print("");
+    }
+
+    public LukuVinkki haeListalta(int mones) {
+        return lista.get(mones);
     }
 
 
-    public void tallenna() {
-        System.out.println("Anna otsikko: ");
+    public void komentoTallenna() {
+        io.print("Anna otsikko: ");
         String otsikko = io.nextString();
-        System.out.println("Anna URL");
+
+        if (otsikko.isEmpty()) {
+            io.print("Otsikko on pakollinen");
+            return;
+        }
+
+        io.print("Anna URL");
         String linkki = io.nextString();
 
+        tallennin(otsikko, linkki);
+
+        io.print("Lukuvinkki tallennettu!\n\n");
+    }
+
+    public void tallennin(String otsikko, String linkki) {
         LukuVinkki vinkki = new LukuVinkki(otsikko, linkki);
-
         lista.add(vinkki);
+    }
 
-        System.out.println("Lukuvinkki tallennettu!");
-        System.out.println("");
-        System.out.println("");
+    public ArrayList<LukuVinkki> getLista() {
+        return this.lista;
     }
 }
