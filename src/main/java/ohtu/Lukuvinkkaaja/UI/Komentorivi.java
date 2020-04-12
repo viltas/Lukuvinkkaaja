@@ -1,9 +1,11 @@
 package ohtu.Lukuvinkkaaja.UI;
 
 import java.sql.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import ohtu.Lukuvinkkaaja.domain.LukuVinkki;
 
@@ -15,7 +17,7 @@ public class Komentorivi {
     public Komentorivi(IO io) throws SQLException {
         this.connection = DriverManager.getConnection("jdbc:sqlite:tietokanta.db");
         this.io = io;
-        
+
     }
 
     public void start() throws SQLException, ParseException {
@@ -72,11 +74,11 @@ public class Komentorivi {
             java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
             String lisattyString = dateFormat.format(lisatty);
 
-            System.out.println(" Otsikko: " + otsikko + "   Osoite: " + osoite + "   Lisatty: " + lisattyString);
+            System.out.println(" Otsikko: " + otsikko + "   Osoite: " + osoite + "   " + "Lisatty: " + lisattyString);
         }
-        if (lista.isEmpty()) {
-            io.print("Et ole vielä tallentanut lukuvinkkejä");
-        }
+        //if (lista.isEmpty()) {
+        //    io.print("Et ole vielä tallentanut lukuvinkkejä");
+        //}
 
         statement.close();
         rs.close();
@@ -87,8 +89,7 @@ public class Komentorivi {
     //public LukuVinkki haeListalta(int mones) {
     //    return lista.get(mones);
     //}
-
-    public void komentoTallenna() {
+    public void komentoTallenna() throws SQLException {
         io.print("Anna otsikko: ");
         String otsikko = io.nextString();
 
@@ -105,14 +106,26 @@ public class Komentorivi {
         io.print("Lukuvinkki tallennettu!\n\n");
     }
 
-    public void tallennin(String otsikko, String linkki) {
-        LukuVinkki vinkki = new LukuVinkki(otsikko, linkki);
-        
+    public void tallennin(String otsikko, String linkki) throws SQLException {
+
+        java.util.Date paivays = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String strPaivays = dateFormat.format(paivays);
+        PreparedStatement stmt
+                = connection.prepareStatement("INSERT INTO lukuvinkki VALUES (?, ?, ?, ?, ?, ?)");
+
+        stmt.setString(2, otsikko);
+        stmt.setString(3, linkki);
+        stmt.setString(4, strPaivays);
+
+        stmt.execute();
+
+        stmt.close();
+
     }
 
     public Object haeListalta(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }
