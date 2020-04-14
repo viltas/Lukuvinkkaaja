@@ -21,7 +21,7 @@ repositories {
 
 
 dependencies {
-    compile group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
+
     compile 'com.google.guava:guava:28.1-jre'
     compile group: 'org.springframework', name: 'spring-core', version:'5.2.0.RELEASE'
     compile group: 'org.springframework', name: 'spring-context', version:'5.2.0.RELEASE'

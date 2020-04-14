@@ -1,7 +1,5 @@
 package UI;
 
-import java.sql.SQLException;
-import java.text.ParseException;
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
@@ -17,19 +15,22 @@ public class KomentoriviTest {
     Komentorivi komentorivi; 
 
     @Before
-    public void setUP() throws SQLException {
+    public void setUP() {
         komentorivi = new Komentorivi(new KomentoriviIO());
     }
 
 
     @Test
     public void tallenninToimii() {
-        
+        komentorivi.tallennin("otsikko", "linkki.fi");
+        String expected = "otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now();
+        String l = komentorivi.getLista().get(0).toString();
+        assertEquals(l, expected);
 
     }
 
     @Test
-    public void tallenninTyhjallaOtsikolla() throws SQLException, ParseException{
+    public void tallenninTyhjallaOtsikolla(){
         IOStub io = new IOStub("T", "","Q");
         new Komentorivi(io).start();
         assertEquals("Otsikko on pakollinen", io.outputs.get(14));
@@ -37,7 +38,7 @@ public class KomentoriviTest {
     }
 
     @Test
-    public void tallenninOtsikollajaTyhjallaLinkilla() throws SQLException, ParseException{
+    public void tallenninOtsikollajaTyhjallaLinkilla(){
         IOStub io = new IOStub("T", "Otsikko","","Q");
         new Komentorivi(io).start();
         assertEquals("Lukuvinkki tallennettu!\n\n", io.outputs.get(15));
@@ -52,7 +53,7 @@ public class KomentoriviTest {
 
 
     @Test
-    public void listausKomentoToimii() throws SQLException, ParseException {
+    public void listausKomentoToimii() {
         IOStub io = new IOStub("T", "Otsikko","linkki.fi","T", "Toinen","toka.fi","L","Q");
         new Komentorivi(io).start();
 
