@@ -117,6 +117,7 @@ public class Komentorivi {
         stmt.setString(2, otsikko);
         stmt.setString(3, linkki);
         stmt.setString(4, strPaivays);
+        stmt.setString(5, "0");
 
         stmt.execute();
 
