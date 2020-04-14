@@ -9,6 +9,8 @@ Pääset CircleCI ja codecov raportteihin klikkaamalla badgesta.
 
 [Sprint 1 backlog](https://docs.google.com/spreadsheets/d/17zqqd2wPArIKMw3Wm-k6DfoM1ncO3UR-O7FUI1Gt5VA/edit#gid=8)
 
+[Sprint 2 backlog](https://docs.google.com/spreadsheets/d/17zqqd2wPArIKMw3Wm-k6DfoM1ncO3UR-O7FUI1Gt5VA/edit#gid=965307742)
+
 [Käyttöohje](https://github.com/viltas/Lukuvinkkaaja/blob/master/dokumentaatio/kayttoohje.md)
 
 ### Definiton of done
