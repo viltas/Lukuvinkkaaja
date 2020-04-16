@@ -1,6 +1,7 @@
 build/
 *.tmp
 .gradle/  
+*.db
 
 # Eclipse
 .classpath
