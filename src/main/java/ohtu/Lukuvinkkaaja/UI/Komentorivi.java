@@ -24,7 +24,7 @@ public class Komentorivi {
 
     }
 
-    public void start() throws SQLException, ParseException {
+    public void start() {
 
         aloitusViesti();
         komentoListaa();
@@ -35,7 +35,6 @@ public class Komentorivi {
              String komento = io.nextString();
 
             if (komento.equalsIgnoreCase("Q")) {
-                connection.close();
                 break;
             }
 
