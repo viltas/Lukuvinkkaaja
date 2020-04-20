@@ -44,7 +44,7 @@ public class KomentoriviTest {
     }
 
     @Test
-    public void listaltaHakuToimii() {
+    public void listaltaHakuToimii() throws SQLException {
         komentorivi.tallennin("otsikko", "linkki.fi");
         String expected = "otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now();
         assertEquals(komentorivi.haeListalta(0).toString(), expected);

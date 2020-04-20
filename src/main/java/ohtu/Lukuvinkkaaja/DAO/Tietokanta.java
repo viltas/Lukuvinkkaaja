@@ -6,7 +6,7 @@ public class Tietokanta {
 
     private String databaseAddress;
 
-    public Tietokanta (String databaseAddress) throws ClassNotFoundException {
+    public Tietokanta (String databaseAddress) {
         this.databaseAddress = databaseAddress;
     }
 

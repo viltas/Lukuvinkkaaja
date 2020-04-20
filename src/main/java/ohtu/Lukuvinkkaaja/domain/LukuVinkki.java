@@ -6,9 +6,8 @@ import java.util.Date;
 
 public class LukuVinkki {
 
-   
-    String otsikko;
-    String URL;
+    private String otsikko;
+    private String URL;
     private boolean luettu;
     private LocalDate lisatty;
     
@@ -34,6 +33,10 @@ public class LukuVinkki {
     
     public LocalDate getDate() {
         return this.lisatty;
+    }
+
+    public void setDate(LocalDate date) {
+        this.lisatty = date;
     }
     
     public LukuVinkki(Kirja kirja) {

@@ -1,21 +1,25 @@
 package ohtu.Lukuvinkkaaja.UI;
 
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
+
+import ohtu.Lukuvinkkaaja.DAO.LukuVinkkiDao;
+import ohtu.Lukuvinkkaaja.DAO.Tietokanta;
 import ohtu.Lukuvinkkaaja.domain.LukuVinkki;
+
 
 public class Komentorivi {
 
-    private IO io;
-    private final Connection connection;
+    private  IO io;
+    private Connection connection;
+    private  Tietokanta tietokanta;
+    private  LukuVinkkiDao lvdao;
 
-    public Komentorivi(IO io) throws SQLException {
-        this.connection = DriverManager.getConnection("jdbc:sqlite:tietokanta.db");
+    public Komentorivi( IO io) throws SQLException {
+        this.tietokanta = new Tietokanta("jdbc:sqlite:tietokanta.db");
+        this.lvdao = new LukuVinkkiDao(tietokanta);
         this.io = io;
 
     }
@@ -28,7 +32,7 @@ public class Komentorivi {
         while (true) {
 
             io.print("komento: ");
-            String komento = io.nextString();
+             String komento = io.nextString();
 
             if (komento.equalsIgnoreCase("Q")) {
                 connection.close();
@@ -61,37 +65,22 @@ public class Komentorivi {
     }
 
     public void komentoListaa() throws SQLException, ParseException {
+         ArrayList<LukuVinkki> lista = lvdao.listaaKaikki();
         io.print("...");
-        System.out.println("Lukuvinkit: ");
-        System.out.println("");
-        Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT * FROM lukuvinkki;");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            String otsikko = rs.getString("otsikko");
-            String osoite = rs.getString("url");
-            java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
-            String lisattyString = dateFormat.format(lisatty);
-
-            System.out.println(" Otsikko: " + otsikko + "   Osoite: " + osoite + "   " + "Lisatty: " + lisattyString);
+        for (int i = 0; i < lista.size(); i++) {
+            io.print(lista.get(i).toString() + "\n");
         }
-        //if (lista.isEmpty()) {
-        //    io.print("Et ole vielä tallentanut lukuvinkkejä");
-        //}
-
-        statement.close();
-        rs.close();
+        if (lista.isEmpty()) {
+            io.print("Et ole vielä tallentanut lukuvinkkejä");
+        }
 
         io.print("");
     }
 
-    //public LukuVinkki haeListalta(int mones) {
-    //    return lista.get(mones);
-    //}
+
     public void komentoTallenna() throws SQLException {
         io.print("Anna otsikko: ");
-        String otsikko = io.nextString();
+         String otsikko = io.nextString();
 
         if (otsikko.isEmpty()) {
             io.print("Otsikko on pakollinen");
@@ -106,26 +95,14 @@ public class Komentorivi {
         io.print("Lukuvinkki tallennettu!\n\n");
     }
 
-    public void tallennin(String otsikko, String linkki) throws SQLException {
-
-        java.util.Date paivays = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String strPaivays = dateFormat.format(paivays);
-        PreparedStatement stmt
-                = connection.prepareStatement("INSERT INTO lukuvinkki VALUES (?, ?, ?, ?, ?, ?)");
-
-        stmt.setString(2, otsikko);
-        stmt.setString(3, linkki);
-        stmt.setString(4, strPaivays);
-        stmt.setString(5, "0");
-
-        stmt.execute();
-
-        stmt.close();
-
+    public void tallennin( String otsikko, String linkki) throws SQLException {
+        LukuVinkki temp = new LukuVinkki(otsikko, linkki);
+        lvdao.tallenna(temp);
+        //
+        
     }
 
-    public Object haeListalta(int i) {
+    public Object haeListalta( int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

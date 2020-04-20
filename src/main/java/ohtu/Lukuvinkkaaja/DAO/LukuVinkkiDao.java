@@ -3,6 +3,10 @@ package ohtu.Lukuvinkkaaja.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.List;
 
 import java.util.*;
@@ -39,36 +43,48 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
 
         conn.close();
 
-        //return lv;
+        // return lv;
         return null;
     }
 
-    
-
     @Override
-    public List<LukuVinkki> listaaKaikki() throws SQLException {
-        List<LukuVinkki> lista = new ArrayList<>();
+    public ArrayList<LukuVinkki> listaaKaikki() throws SQLException {
+        ArrayList<LukuVinkki> lista = new ArrayList<>();
 
-       try ( Connection conn = tietokanta.getConnection();
-        ResultSet rs = conn.prepareStatement("SELECT * FROM Lukuvinkki").executeQuery()) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try (Connection conn = tietokanta.getConnection();
+                ResultSet rs = conn.prepareStatement("SELECT * FROM Lukuvinkki").executeQuery()) {
 
-        while(rs.next()) {
-            lista.add(new LukuVinkki(rs.getString(1),rs.getString(2))); //tarvitsee muokkausta oikeaan muotoon
+            while (rs.next()) {
+                java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
+                String otsikko = rs.getString("otsikko");
+                String osoite = rs.getString("url");
+                LukuVinkki temp = new LukuVinkki(otsikko, osoite);
+                temp.setDate(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                lista.add(temp); // tarvitsee muokkausta oikeaan muotoon
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-    }
         return lista;
     }
 
     @Override
-    public void tallenna(LukuVinkki object) throws SQLException {
+    public void tallenna(LukuVinkki lukuvinkki) throws SQLException {
         Connection conn = tietokanta.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Lukuvinkki (something) VALUES (?)"); //fix to the right form
-        
-        stmt.setString(1, object.getOtsikko());
-        stmt.executeUpdate();
+        java.util.Date paivays = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String strPaivays = dateFormat.format(paivays);
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO lukuvinkki VALUES (?, ?, ?, ?, ?, ?)");
+
+        stmt.setString(2, lukuvinkki.getOtsikko());
+        stmt.setString(3, lukuvinkki.getURL());
+        stmt.setString(4, strPaivays);
+        stmt.setString(5, "0");
+
+        stmt.execute();
 
         stmt.close();
-        conn.close();
 
 
     }
@@ -89,6 +105,16 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         stmt.close();
         conn.close();
 
+    }
+
+    public void luoTaulu() throws SQLException {
+        String sqlCreate = "CREATE TABLE IF NOT EXISTS Lukuvinkki" 
+        + "  (ID              Integer,"
+        + "  (Otsikko         String,"
+        + "  (Url             String"
+        + "  (strPaivays      DATETIME,"    //?
+        + "  (viides          String,"      //?
+        + "  (kuudes          String,";     //?
     }
 
 
