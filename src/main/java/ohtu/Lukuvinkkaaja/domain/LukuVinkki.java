@@ -94,9 +94,9 @@ public class LukuVinkki {
     public String toString() {
         String lukuteksti = "";
         if (this.onkoluettu) {
-            lukuteksti = (", luettu: " + this.luettu);
+            lukuteksti = (", (luettu: " + this.luettu + ")");
         }
-        return this.id + " " + this.otsikko +" "+ this.URL +" "+ this.lisatty + lukuteksti;
+        return this.id + " " + this.otsikko +" ("+ this.URL + ") " + "[lisätty:  "+ this.lisatty + lukuteksti +"] ";
     }
 
     public void setId(int id) {

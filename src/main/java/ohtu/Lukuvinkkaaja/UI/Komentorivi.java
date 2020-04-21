@@ -28,6 +28,8 @@ public class Komentorivi {
 
         aloitusViesti();
         komentoListaa();
+        System.out.println("----------------");
+        aloitusViesti();
 
         while (true) {
 
@@ -65,9 +67,9 @@ public class Komentorivi {
 
         io.print("Tallenna uusi lukuvinkki: T");
         io.print("Listaa lukuvinkit: L");
-        io.print("Lopeta: Q");
-        io.print("Merkka luetiksi: M");
+        io.print("Merkkaa luetuksi: M");
         io.print("Poista lukuvinkki: P");
+        io.print("Lopeta: Q");
         io.print("---------------------------");
         io.print("");
     }
