@@ -90,8 +90,20 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
     }
 
     @Override
-    public void paivita(LukuVinkki object) throws SQLException {
-        // TODO Auto-generated method stub
+    public void paivita(int id) throws SQLException {
+        Connection conn = tietokanta.getConnection();
+        java.util.Date paivays = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String strPaivays = dateFormat.format(paivays);
+        PreparedStatement stmt = conn.prepareStatement("UPDATE lukuvinkki SET onkoluettu = ?, luettu = ?  WHERE Otsikko = ?");
+        
+        stmt.setBoolean(1, true);
+        stmt.setString(2, strPaivays);
+        stmt.setInt(3, id);
+        stmt.executeUpdate();
+
+        stmt.close();
+        conn.close();
     }
 
     @Override
