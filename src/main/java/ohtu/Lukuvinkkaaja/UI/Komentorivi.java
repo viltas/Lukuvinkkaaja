@@ -28,6 +28,8 @@ public class Komentorivi {
 
         aloitusViesti();
         komentoListaa();
+        System.out.println("----------------");
+        aloitusViesti();
 
         while (true) {
 
@@ -49,6 +51,10 @@ public class Komentorivi {
             if (komento.equalsIgnoreCase("M")) {
                 komentoMerkkaaLuetuksi();
             }
+            
+            if (komento.equalsIgnoreCase("P")) {
+                komentoPoista();
+            }
         }
 
     }
@@ -61,8 +67,9 @@ public class Komentorivi {
 
         io.print("Tallenna uusi lukuvinkki: T");
         io.print("Listaa lukuvinkit: L");
+        io.print("Merkkaa luetuksi: M");
+        io.print("Poista lukuvinkki: P");
         io.print("Lopeta: Q");
-        io.print("Merkka luetiksi: M");
         io.print("---------------------------");
         io.print("");
     }
@@ -119,6 +126,19 @@ public class Komentorivi {
             io.print("Anna kunnollinen id");
             return;
         }
+        
+    }
+    
+    private void komentoPoista() throws SQLException {
+        io.print("Anna poistettavan lukuvinkin id: ");
+        try {
+            int id = Integer.parseInt(io.nextString());
+            lvdao.poista(id);
+            io.print("Lukuvinkki " + id + " poistettu.");
+        } catch (NumberFormatException e) {
+            io.print("Anna kunnollinen id");
+            return;
+        } 
         
     }
 
