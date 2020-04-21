@@ -57,10 +57,18 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
 
             while (rs.next()) {
                 java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
+
+                int id = rs.getInt("id");
                 String otsikko = rs.getString("otsikko");
                 String osoite = rs.getString("url");
                 LukuVinkki temp = new LukuVinkki(otsikko, osoite);
-                temp.setDate(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                temp.setId(id);
+                temp.setOnkoluettu(rs.getBoolean("luettu"));
+                temp.setLisatty(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                if (temp.isOnkoluettu()) {
+                    java.util.Date luettu = dateFormat.parse(rs.getString("luettu"));    
+                    temp.setLuettu(luettu.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                }
                 lista.add(temp); // tarvitsee muokkausta oikeaan muotoon
             }
         } catch (ParseException e) {
