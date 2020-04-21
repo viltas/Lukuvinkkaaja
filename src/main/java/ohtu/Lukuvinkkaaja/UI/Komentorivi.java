@@ -24,7 +24,7 @@ public class Komentorivi {
 
     }
 
-    public void start() {
+    public void start() throws SQLException, ParseException {
 
         aloitusViesti();
         komentoListaa();

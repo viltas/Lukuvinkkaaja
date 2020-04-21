@@ -53,7 +53,7 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try (Connection conn = tietokanta.getConnection();
-                ResultSet rs = conn.prepareStatement("SELECT * FROM Lukuvinkki").executeQuery()) {
+                ResultSet rs = conn.prepareStatement("SELECT * FROM Lukuvinkki ORDER BY lisatty DESC").executeQuery()) {
 
             while (rs.next()) {
                 java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
