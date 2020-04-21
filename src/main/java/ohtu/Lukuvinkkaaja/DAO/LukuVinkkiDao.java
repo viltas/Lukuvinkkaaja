@@ -95,7 +95,7 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         java.util.Date paivays = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strPaivays = dateFormat.format(paivays);
-        PreparedStatement stmt = conn.prepareStatement("UPDATE lukuvinkki SET onkoluettu = ?, luettu = ?  WHERE Otsikko = ?");
+        PreparedStatement stmt = conn.prepareStatement("UPDATE lukuvinkki SET onkoluettu = ?, luettu = ?  WHERE id = ?");
         
         stmt.setBoolean(1, true);
         stmt.setString(2, strPaivays);

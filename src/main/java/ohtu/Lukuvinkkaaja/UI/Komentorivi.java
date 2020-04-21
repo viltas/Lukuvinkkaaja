@@ -46,6 +46,9 @@ public class Komentorivi {
                 komentoListaa();
             }
 
+            if (komento.equalsIgnoreCase("M")) {
+                komentoMerkkaaLuetuksi();
+            }
         }
 
     }
@@ -59,6 +62,7 @@ public class Komentorivi {
         io.print("Tallenna uusi lukuvinkki: T");
         io.print("Listaa lukuvinkit: L");
         io.print("Lopeta: Q");
+        io.print("Merkka luetiksi: M");
         io.print("---------------------------");
         io.print("");
     }
@@ -103,6 +107,19 @@ public class Komentorivi {
 
     public Object haeListalta( int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void komentoMerkkaaLuetuksi() throws SQLException {
+        io.print("Anna luetun artikkelin id: ");
+        try {
+            int id = Integer.parseInt(io.nextString());
+            lvdao.paivita(id);
+            io.print("Artikkeli " + id + " merkitty luetuksi!");
+        } catch (NumberFormatException e) {
+            io.print("Anna kunnollinen id");
+            return;
+        }
+        
     }
 
 }
