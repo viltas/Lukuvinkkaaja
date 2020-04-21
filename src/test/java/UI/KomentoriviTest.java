@@ -60,13 +60,14 @@ public class KomentoriviTest {
         boolean ok = false;
         boolean ok2 = false;
         for (String s : io.outputs) {
-            if (s.contains("Otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now())) {
+            if (s.contains("Otsikko (linkki.fi) [lisätty:  "+ LocalDate.now())) {
                 ok = true;
             }
-            if (s.contains("Toinen" +" "+ "toka.fi" +" "+ LocalDate.now())) {
+            if (s.contains("Toinen (toka.fi) [lisätty:  "+ LocalDate.now())) {
                 ok2 = true;
             }
         }
+        
         assertEquals(true, ok);
         assertEquals(true, ok2);
     }
