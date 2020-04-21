@@ -25,8 +25,7 @@ public class Komentorivi {
     }
 
     public void start() throws SQLException, ParseException {
-
-        aloitusViesti();
+        
         komentoListaa();
         System.out.println("----------------");
         aloitusViesti();
@@ -108,13 +107,14 @@ public class Komentorivi {
     public void tallennin( String otsikko, String linkki) throws SQLException {
         LukuVinkki temp = new LukuVinkki(otsikko, linkki);
         lvdao.tallenna(temp);
-        //
         
     }
 
-    public Object haeListalta( int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
+    //TODO
+    //public Object haeListalta( int i) {
+    //    throw new UnsupportedOperationException("Not supported yet."); //To change body //of generated methods, choose Tools | Templates.
+    //}
 
     private void komentoMerkkaaLuetuksi() throws SQLException {
         io.print("Anna luetun artikkelin id: ");

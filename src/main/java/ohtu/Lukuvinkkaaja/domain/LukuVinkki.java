@@ -78,17 +78,17 @@ public class LukuVinkki {
     
     
     
-    public LukuVinkki(Kirja kirja) {
+    // public LukuVinkki(Kirja kirja) {
      
-    }
+    // }
     
-    public LukuVinkki(Podcast podcast) {
+    // public LukuVinkki(Podcast podcast) {
         
-    }
+    // }
     
-    public LukuVinkki(Video video) {
+    // public LukuVinkki(Video video) {
         
-    }
+    // }
     
     @Override
     public String toString() {

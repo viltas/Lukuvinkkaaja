@@ -72,6 +72,57 @@ public class KomentoriviTest {
         assertEquals(true, ok2);
     }
 
+    @Test
+    public void poistaminenToimii() throws SQLException, ParseException {
+        IOStub io = new IOStub("T", "Otsikko","linkki.fi","P","1","Q");
+        new Komentorivi(io).start();
+        boolean ok = false;
+        for (String s : io.outputs) {
+            if (s.contains("Lukuvinkki 1 poistettu.")) {
+                ok = true;
+            }    
+        }
+        assertTrue(ok);
+    }
+
+    @Test
+    public void luetuksiMerkkaaminenToimii() throws SQLException, ParseException {
+        IOStub io = new IOStub("T", "Otsikko","linkki.fi","M","1","Q");
+        new Komentorivi(io).start();
+        boolean ok = false;
+        for (String s : io.outputs) {
+            if (s.contains("Artikkeli 1 merkitty luetuksi!")) {
+                ok = true;
+            }    
+        }
+        assertTrue(ok);
+    }
+
+    @Test
+    public void luetuksiMerkkaaminenEiToimiHuonollaInputilla() throws SQLException, ParseException {
+        IOStub io = new IOStub("T", "Otsikko","linkki.fi","M","yksi","Q");
+        new Komentorivi(io).start();
+        boolean ok = false;
+        for (String s : io.outputs) {
+            if (s.contains("Anna kunnollinen id")) {
+                ok = true;
+            }    
+        }
+        assertTrue(ok);
+    }
+
+    @Test
+    public void poistaminenEiToimiHuonollaInputilla() throws SQLException, ParseException {
+        IOStub io = new IOStub("T", "Otsikko","linkki.fi","P","yksi","Q");
+        new Komentorivi(io).start();
+        boolean ok = false;
+        for (String s : io.outputs) {
+            if (s.contains("Anna kunnollinen id")) {
+                ok = true;
+            }    
+        }
+        assertTrue(ok);
+    }
 
 
 }

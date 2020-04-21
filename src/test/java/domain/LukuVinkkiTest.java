@@ -67,6 +67,30 @@ public class LukuVinkkiTest {
         
     }
 
+    @Test
+    public void otsikonSettaaminenToimii() {
+        lukuVinkki.setOtsikko("uusiOtsikko");
+        assertEquals("uusiOtsikko", lukuVinkki.getOtsikko());
+
+    }
+
+    @Test
+    public void urlinSettaaminenToimii() {
+        lukuVinkki.setURL("uusiURL");
+        assertEquals("uusiURL", lukuVinkki.getURL());
+
+    }
+
+
+    @Test
+    public void luetunSettaaminenToimii() {
+        lukuVinkki.setLuettu(LocalDate.now());
+        assertEquals(LocalDate.now(), lukuVinkki.getLuettu());
+
+    }
+
+
+
 
 
 
