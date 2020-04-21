@@ -40,18 +40,19 @@ Lukuvinkkaaja listaa tallennetut lukuvinkit omille riveilleen muodossa nimi-osoi
 ## Lukuvinkin merkkaaminen luetuksi
 
 Lukuvinkit merkataan luetuksi komennolla:
-...
+```
 M
-...
+```
 
-Lukuvinkkaajassa voi merkata lukuvinkin luetuksi. Luettuun lukuvinkkiin tallentuu myös päivämäärä, jolloin se on merkattu luetuksi. Lukuvinkin merkkaamisen jälkeen ohjelma pyytää uutta komentoa.
+Lukuvinkkaajassa voi merkata lukuvinkin luetuksi. Luettuun lukuvinkkiin tallentuu myös päivämäärä, jolloin se on merkattu luetuksi. Lukuvinkin luetuksi merkkaamisen jälkeen ohjelma pyytää uutta komentoa.
 
 ## Lukuvinkin poistaminen
 
 Lukuvinkit poistetaan komennolla:
-...
+```
 P
-...
+```
+
 Lukuvinkin poistaminen poistaa lukuvinkin tietokannasta kokonaisuudessaan. Poistettua lukuvinkkiä ei voi palauttaa. Poistamisen jälkeen ohjelma kysyy uutta komentoa.
 
 
