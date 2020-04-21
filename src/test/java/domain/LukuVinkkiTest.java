@@ -41,7 +41,7 @@ public class LukuVinkkiTest {
 
     @Test
     public void paivamaaraOnOikein() {
-        assertTrue(lukuVinkki.getDate().equals(LocalDate.now()));
+        assertTrue(lukuVinkki.getLisatty().equals(LocalDate.now()));
     }
 
 

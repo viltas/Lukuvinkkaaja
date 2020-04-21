@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ohtu.Lukuvinkkaaja.UI.*;
+import static org.junit.Assert.assertTrue;
 
 
 public class KomentoriviTest {
@@ -32,7 +33,7 @@ public class KomentoriviTest {
     public void tallenninTyhjallaOtsikolla() throws SQLException, ParseException{
         IOStub io = new IOStub("T", "","Q");
         new Komentorivi(io).start();
-        assertEquals("Otsikko on pakollinen", io.outputs.get(14));
+        assertEquals("Otsikko on pakollinen", io.outputs.get(io.outputs.size()-2));
 
     }
 
@@ -40,26 +41,34 @@ public class KomentoriviTest {
     public void tallenninOtsikollajaTyhjallaLinkilla() throws SQLException, ParseException{
         IOStub io = new IOStub("T", "Otsikko","","Q");
         new Komentorivi(io).start();
-        assertEquals("Lukuvinkki tallennettu!\n\n", io.outputs.get(15));
+        assertEquals("Lukuvinkki tallennettu!\n\n", io.outputs.get(io.outputs.size()-2));
     }
 
-    @Test
-    public void listaltaHakuToimii() throws SQLException {
-        komentorivi.tallennin("otsikko", "linkki.fi");
-        String expected = "otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now();
-        assertEquals(komentorivi.haeListalta(0).toString(), expected);
-    }
+    //unsupported
+//    @Test
+//    public void listaltaHakuToimii() throws SQLException {
+//        komentorivi.tallennin("otsikko", "linkki.fi");
+//        String expected = "otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now();
+//        assertTrue(komentorivi.haeListalta(0).toString().contains(expected));
+//    }
 
 
     @Test
     public void listausKomentoToimii() throws SQLException, ParseException {
         IOStub io = new IOStub("T", "Otsikko","linkki.fi","T", "Toinen","toka.fi","L","Q");
         new Komentorivi(io).start();
-
-
-        assertEquals("Otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now() + "\n", io.outputs.get(22));
-        assertEquals("Toinen" +" "+ "toka.fi" +" "+ LocalDate.now() + "\n", io.outputs.get(23));
-
+        boolean ok = false;
+        boolean ok2 = false;
+        for (String s : io.outputs) {
+            if (s.contains("Otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now())) {
+                ok = true;
+            }
+            if (s.contains("Toinen" +" "+ "toka.fi" +" "+ LocalDate.now())) {
+                ok2 = true;
+            }
+        }
+        assertEquals(true, ok);
+        assertEquals(true, ok2);
     }
 
 
