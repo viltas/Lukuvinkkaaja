@@ -35,7 +35,24 @@ Vinkit listataan komennolla:
 L
 ```
 
-Lukuvinkkaaja listaa tallennetut lukuvinkit omille riveilleen muodossa nimi-osoite-päivämäärä. Päivämäärä on lukuvinkin lisäyspäivämäärä. Lukuvinkkien listaamisen jälkeen ohjelma pyytää uutta komentoa. Voit lisätä uuden lukuvinkin tai poistua sovelluksesta.
+Lukuvinkkaaja listaa tallennetut lukuvinkit omille riveilleen muodossa nimi-osoite-päivämäärä. Päivämäärä on lukuvinkin lisäyspäivämäärä. Lukuvinkit listataan lisäyspäivämäärän mukaan, niin että tuoreimmat lukuvinkit on päällimäisenä. Lukuvinkkien listaamisen jälkeen ohjelma pyytää uutta komentoa.
+
+## Lukuvinkin merkkaaminen luetuksi
+
+Lukuvinkit merkataan luetuksi komennolla:
+...
+M
+...
+
+Lukuvinkkaajassa voi merkata lukuvinkin luetuksi. Luettuun lukuvinkkiin tallentuu myös päivämäärä, jolloin se on merkattu luetuksi. Lukuvinkin merkkaamisen jälkeen ohjelma pyytää uutta komentoa.
+
+## Lukuvinkin poistaminen
+
+Lukuvinkit poistetaan komennolla:
+...
+P
+...
+Lukuvinkin poistaminen poistaa lukuvinkin tietokannasta kokonaisuudessaan. Poistettua lukuvinkkiä ei voi palauttaa. Poistamisen jälkeen ohjelma kysyy uutta komentoa.
 
 
 ## Sovelluksen sulkeminen
@@ -44,3 +61,5 @@ Sovellus suljetaan komennolla
 ```
 Q
 ```
+
+
