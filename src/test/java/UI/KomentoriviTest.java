@@ -124,6 +124,20 @@ public class KomentoriviTest {
         assertTrue(ok);
     }
 
+    @Test
+    public void listanTyhjentaminenToimii() throws SQLException, ParseException {
+        komentorivi.tyhjennaLista();
+        IOStub io = new IOStub("L", "Q");
+        new Komentorivi(io).start();
+        boolean ok = false;
+        for (String s : io.outputs) {
+            if (s.contains("Et ole vielä tallentanut lukuvinkkejä")) {
+                ok = true;
+            }    
+        }
+        assertTrue(ok);
+    }
+
 
 }
 

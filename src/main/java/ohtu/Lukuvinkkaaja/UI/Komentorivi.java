@@ -25,7 +25,7 @@ public class Komentorivi {
     }
 
     public void start() throws SQLException, ParseException {
-        
+
         komentoListaa();
         System.out.println("----------------");
         aloitusViesti();
@@ -74,7 +74,7 @@ public class Komentorivi {
     }
 
     public void komentoListaa() throws SQLException, ParseException {
-         ArrayList<LukuVinkki> lista = lvdao.listaaKaikki();
+        ArrayList<LukuVinkki> lista = lvdao.listaaKaikki();
         io.print("...");
         for (int i = 0; i < lista.size(); i++) {
             io.print(lista.get(i).toString() + "\n");
@@ -140,6 +140,13 @@ public class Komentorivi {
             return;
         } 
         
+    }
+
+    public void tyhjennaLista() throws SQLException {
+        ArrayList<LukuVinkki> lista = lvdao.listaaKaikki();
+        for (LukuVinkki lukuVinkki : lista) {
+            lvdao.poista(lukuVinkki.getId());
+        }
     }
 
 }
