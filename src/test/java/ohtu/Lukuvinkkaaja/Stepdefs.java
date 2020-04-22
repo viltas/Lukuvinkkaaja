@@ -59,10 +59,10 @@ public class Stepdefs {
 
     }
 
-    @Given("ui is running")
-    public void uiIsRunning() throws SQLException {
-        komentorivi = new Komentorivi(new KomentoriviIO());
-    }
+//    @Given("ui is running")
+//    public void uiIsRunning() throws SQLException {
+//        komentorivi = new Komentorivi(new KomentoriviIO());
+//    }
 
     @When("tips are listed")
     public void tipsAreListed() throws SQLException, ParseException {
