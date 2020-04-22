@@ -15,21 +15,17 @@ repositories {
     mavenCentral()    
     
 }
- 
-
-
-
 
 dependencies {
-    compile group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
-    compile 'com.google.guava:guava:28.1-jre'
-    compile group: 'org.springframework', name: 'spring-core', version:'5.2.0.RELEASE'
-    compile group: 'org.springframework', name: 'spring-context', version:'5.2.0.RELEASE'
-    compile group: 'org.springframework', name: 'spring-context-support', version:'5.2.0.RELEASE'
-    compile group: 'org.springframework', name: 'spring-beans', version:'5.2.0.RELEASE' 
-    testCompile 'io.cucumber:cucumber-java:' + cucumberVersion
-    testCompile 'io.cucumber:cucumber-junit:' + cucumberVersion
-    testCompile 'junit:junit:4.12'
+    implementation group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
+    implementation 'com.google.guava:guava:28.1-jre'
+    implementation group: 'org.springframework', name: 'spring-core', version:'5.2.0.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-context', version:'5.2.0.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-context-support', version:'5.2.0.RELEASE'
+    implementation group: 'org.springframework', name: 'spring-beans', version:'5.2.0.RELEASE' 
+    testImplementation 'io.cucumber:cucumber-java:' + cucumberVersion
+    testImplementation 'io.cucumber:cucumber-junit:' + cucumberVersion
+    testImplementation 'junit:junit:4.12'
 
 }
 
