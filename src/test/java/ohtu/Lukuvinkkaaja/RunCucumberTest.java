@@ -14,14 +14,14 @@ import org.junit.runner.RunWith;
  *
  * @author iilkka
  */
-    @RunWith(Cucumber.class)
-    @CucumberOptions(
-    plugin = "pretty",
-            features = "src/test/resources/Lukuvinkkaaja",
-            snippets = SnippetType.CAMELCASE
-    )
-public class RunCucumberTest {
-    
-
-    
-}
+//    @RunWith(Cucumber.class)
+//    @CucumberOptions(
+//    plugin = "pretty",
+//            features = "src/test/resources/Lukuvinkkaaja",
+//            snippets = SnippetType.CAMELCASE
+//    )
+//public class RunCucumberTest {
+//    
+//
+//    
+//}
