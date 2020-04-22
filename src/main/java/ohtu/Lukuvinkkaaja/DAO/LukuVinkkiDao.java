@@ -127,20 +127,18 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
 
     }
 
+    public void luoTaulu() throws SQLException {
+        String sqlCreate = "CREATE TABLE IF NOT EXISTS Lukuvinkki" 
+        + "  (ID              Integer,"
+        + "  Otsikko         Varchar(60),"
+        + "  Url             Varchar(60),"
+        + "  lisatty         DATE,"   
+        + "  onkoluettu      Boolean,"     
+        + "  luettu          DATE);";     
+        
+        Connection conn = tietokanta.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sqlCreate);
+        stmt.execute();
 
-//   VAATII TÄLLÄ HETKELLÄ VALMIIN .DB -TIEDOSTON TOIMIAKSEEN
-//   PITÄÄ LISÄTÄ TOIMIVA TAULUKON LUONTI ALKULISTAUSTA VARTEN.
-//
-//    public void luoTaulu() throws SQLException {
-//        String sqlCreate = "CREATE TABLE IF NOT EXISTS Lukuvinkki" 
-//        + "  (ID              Integer,"
-//        + "  (Otsikko         Varchar(60),"
-//        + "  (Url             Varchar(60)"
-//        + "  (lisatty         DATE,"   
-//        + "  (onkoluettu      Boolean,"     
-//        + "  (luettu          DATE,";     
-//    }
-
-
-
+    }
 }

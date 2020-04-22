@@ -17,8 +17,8 @@ public class Komentorivi {
     private  Tietokanta tietokanta;
     private  LukuVinkkiDao lvdao;
 
-    public Komentorivi( IO io) throws SQLException {
-        this.tietokanta = new Tietokanta("jdbc:sqlite:tietokanta.db");
+    public Komentorivi( IO io, Tietokanta tietokanta) throws SQLException {
+        this.tietokanta = tietokanta;
         this.lvdao = new LukuVinkkiDao(tietokanta);
         this.io = io;
 
@@ -147,6 +147,10 @@ public class Komentorivi {
         for (LukuVinkki lukuVinkki : lista) {
             lvdao.poista(lukuVinkki.getId());
         }
+    }
+    
+    public void alustaTietokanta() throws SQLException {
+        lvdao.luoTaulu();
     }
 
 }
