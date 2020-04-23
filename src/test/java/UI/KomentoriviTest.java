@@ -143,6 +143,13 @@ public class KomentoriviTest {
 //        }
 //        assertTrue(ok);
 //    }
+    
+        
+    @After
+    public void tearDown() {
+        File f = new File("testikanta.db");
+        f.delete();
+    }
 
 
 }
@@ -166,12 +173,4 @@ class IOStub implements IO {
     public void print(String m) {
         outputs.add(m);
     }
-    
-    @After
-    public void tearDown() {
-        File f = new File("testikanta.db");
-        f.delete();
-    }
-
-
 }
