@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import ohtu.Lukuvinkkaaja.DAO.Tietokanta;
 import ohtu.Lukuvinkkaaja.UI.Komentorivi;
 import org.junit.After;
@@ -121,16 +123,17 @@ public class Stepdefs {
         assertTrue(b); 
     }
 
-    @Then("Molemmilla vinkeilla {string} on uniikki id")
-    public void molemmillaVinkeillaOnUniikkiId(String string) {
-        ArrayList<String> vinkit = new ArrayList<>();
+    @Then("Kaikilla vinkeillä on oma id")
+    public void molemmillaVinkeillaOnUniikkiId() {
+        ArrayList<String> idt = new ArrayList<>();
         for (String s : io.outputs) {
-            if (s.contains(string)) {
-                vinkit.add(s);
+            if (s.contains("lisätty:")) {
+                idt.add(s.substring(0, s.indexOf(" ")));
             }
         }
-
-        assertTrue(!vinkit.get(0).equals(vinkit.get(1)));
+        Set<String> idSet = new HashSet<String>(idt);
+        
+        assertTrue(idt.size() == idSet.size());
         
     }
 
@@ -138,9 +141,7 @@ public class Stepdefs {
     public void kayttajaMerkkaLukuvinkinLuetuksi(String string) throws SQLException, ParseException {
         for (String s : io.outputs) {
             if (s.contains(string)) {
-                System.out.println(s);
                 id = s.substring(0, s.indexOf(" "));
-                System.out.println(id);
             }
         }
         
