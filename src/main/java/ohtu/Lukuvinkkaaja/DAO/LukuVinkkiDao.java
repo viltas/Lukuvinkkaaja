@@ -129,7 +129,7 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
 
     public void luoTaulu() throws SQLException {
         String sqlCreate = "CREATE TABLE IF NOT EXISTS Lukuvinkki" 
-        + "  (ID              Integer,"
+        + "  (ID              Integer PRIMARY KEY,"
         + "  Otsikko         Varchar(60),"
         + "  Url             Varchar(60),"
         + "  lisatty         DATE,"   
