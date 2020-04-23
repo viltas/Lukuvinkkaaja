@@ -9,6 +9,6 @@ Feature: Lukuvinkki voidaan merkitä luetuksi ja lukuajankohta tallentuu
     Scenario: Viittaamalla id:seen voi merkata vinkin luetuksi
     Given Tietokanta on olemassa
     When  Kayttaja lisaa lukuvinkin "Luettava" ja linkin ""
-    And   Kayttaja merkka lukuvinkin "Luettava" luetuksi
     And   Ohjelma käynnistetään
+    And   Kayttaja merkka lukuvinkin "Luettava" luetuksi
     Then  Lukuvinkki "Luettava" on luettu

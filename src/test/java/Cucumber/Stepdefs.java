@@ -8,13 +8,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import static java.util.Collections.list;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import ohtu.Lukuvinkkaaja.DAO.Tietokanta;
-import ohtu.Lukuvinkkaaja.UI.IO;
 import ohtu.Lukuvinkkaaja.UI.Komentorivi;
 import org.junit.After;
 import static org.junit.Assert.assertTrue;
@@ -24,6 +18,7 @@ public class Stepdefs {
     Tietokanta tietokanta;
     Komentorivi komentorivi;
     IOStub io;
+    String id;
 
     @Before
     public void setUp() throws SQLException {
@@ -126,13 +121,11 @@ public class Stepdefs {
         assertTrue(b); 
     }
 
-    //JOSTAIN SYYSTÄ ID:T EIVÄT TOIMI
     @Then("Molemmilla vinkeilla {string} on uniikki id")
     public void molemmillaVinkeillaOnUniikkiId(String string) {
         ArrayList<String> vinkit = new ArrayList<>();
         for (String s : io.outputs) {
             if (s.contains(string)) {
-                System.out.println(s);
                 vinkit.add(s);
             }
         }
@@ -142,15 +135,23 @@ public class Stepdefs {
     }
 
     @When("Kayttaja merkka lukuvinkin {string} luetuksi")
-    public void kayttajaMerkkaLukuvinkinLuetuksi(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+    public void kayttajaMerkkaLukuvinkinLuetuksi(String string) throws SQLException, ParseException {
+        for (String s : io.outputs) {
+            if (s.contains(string)) {
+                System.out.println(s);
+                id = s.substring(0, s.indexOf(" "));
+                System.out.println(id);
+            }
+        }
+        
+        io = new IOStub("M", id, "Q");
+        komentorivi = new Komentorivi(io, tietokanta);
+        komentorivi.start();      
     }
 
     @Then("Lukuvinkki {string} on luettu")
     public void lukuvinkkiOnLuettu(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+        assertTrue(io.outputs.contains("Artikkeli " + id + " merkitty luetuksi!"));
     }
     
 
