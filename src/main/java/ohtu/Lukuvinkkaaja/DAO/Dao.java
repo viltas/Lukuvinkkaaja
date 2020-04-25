@@ -9,4 +9,5 @@ public interface Dao<Obj, Key> {
     void tallenna(Obj object) throws SQLException;
     void paivita(int id) throws SQLException;
     void poista(Key key) throws SQLException;
+    void annaTagi(int id, String tagi) throws SQLException;
 }

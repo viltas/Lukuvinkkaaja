@@ -53,6 +53,10 @@ public class Komentorivi {
             
             if (komento.equalsIgnoreCase("P")) {
                 komentoPoista();
+            } 
+            
+            if (komento.equalsIgnoreCase("A")) {
+                komentoAnnaTagi();
             }
         }
 
@@ -68,6 +72,7 @@ public class Komentorivi {
         io.print("Listaa lukuvinkit: L");
         io.print("Merkkaa luetuksi: M");
         io.print("Poista lukuvinkki: P");
+        io.print("Anna lukuvinkille tagi: A");
         io.print("Lopeta: Q");
         io.print("---------------------------");
         io.print("");
@@ -140,6 +145,23 @@ public class Komentorivi {
             return;
         } 
         
+    }
+    
+    private void komentoAnnaTagi() throws SQLException {
+        io.print("Anna lukuvinkin id: ");
+        try {
+            int id = Integer.parseInt(io.nextString());
+            
+            io.print("Kirjoita tagi: ");
+            String tagi = io.nextString();
+            lvdao.annaTagi(id, tagi);
+            
+            io.print("Lukuvinkille " + id + " on annettu tagi " +tagi);
+            
+        } catch (NumberFormatException e) {
+            io.print("Anna kunnollinen id");
+            return;
+        }
     }
 
     public void tyhjennaLista() throws SQLException {

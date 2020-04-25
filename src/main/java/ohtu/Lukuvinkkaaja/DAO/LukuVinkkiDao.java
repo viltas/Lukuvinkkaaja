@@ -61,14 +61,18 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
                 int id = rs.getInt("id");
                 String otsikko = rs.getString("otsikko");
                 String osoite = rs.getString("url");
+                String tagi = rs.getString("tagi");
                 LukuVinkki temp = new LukuVinkki(otsikko, osoite);
                 temp.setId(id);
+                temp.setTagi(tagi);
                 temp.setOnkoluettu(rs.getBoolean("luettu"));
                 temp.setLisatty(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 if (temp.isOnkoluettu()) {
                     java.util.Date luettu = dateFormat.parse(rs.getString("luettu"));    
                     temp.setLuettu(luettu.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 }
+                
+                
                 lista.add(temp); // tarvitsee muokkausta oikeaan muotoon
             }
         } catch (ParseException e) {
@@ -83,7 +87,7 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         java.util.Date paivays = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strPaivays = dateFormat.format(paivays);
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO lukuvinkki VALUES (?, ?, ?, ?, ?, ?)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO lukuvinkki VALUES (?, ?, ?, ?, ?, ?, ?)");
 
         stmt.setString(2, lukuvinkki.getOtsikko());
         stmt.setString(3, lukuvinkki.getURL());
@@ -122,20 +126,35 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         stmt.setInt(1, key);
         stmt.executeUpdate();
 
-        stmt.close();
+        stmt.close(); 
         conn.close();
 
     }
+    
+    @Override
+    public void annaTagi(int id, String tagi) throws SQLException {
+        Connection conn = tietokanta.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("UPDATE lukuvinkki SET tagi = ? WHERE id = ?");
+        
+        stmt.setString(1, tagi);
+        stmt.setInt(2, id);
+        stmt.executeUpdate();
+        
+        stmt.close();
+        conn.close();
+        
+    }
 
     public void luoTaulu() throws SQLException {
-        String sqlCreate = "CREATE TABLE IF NOT EXISTS Lukuvinkki" 
-        + "  (ID              Integer PRIMARY KEY,"
+        String sqlCreate = "CREATE TABLE IF NOT EXISTS Lukuvinkki"
+        + "  (ID             Integer PRIMARY KEY,"
         + "  Otsikko         Varchar(60),"
         + "  Url             Varchar(60),"
         + "  lisatty         DATE,"   
         + "  onkoluettu      Boolean,"     
-        + "  luettu          DATE);";     
-        
+        + "  luettu          DATE,"  
+        + "  tagi            VarChar(60));";     
+         
         Connection conn = tietokanta.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sqlCreate);
         stmt.execute();
