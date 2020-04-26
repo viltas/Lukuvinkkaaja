@@ -46,6 +46,14 @@ public class Komentorivi {
             if (komento.equalsIgnoreCase("L")) {
                 komentoListaa();
             }
+            
+            if (komento.equalsIgnoreCase("U")) {
+                komentoListaaLukemattomat();
+            }
+            
+            if (komento.equalsIgnoreCase("R")) {
+                komentoListaaLuetut();
+            }
 
             if (komento.equalsIgnoreCase("M")) {
                 komentoMerkkaaLuetuksi();
@@ -58,6 +66,7 @@ public class Komentorivi {
             if (komento.equalsIgnoreCase("A")) {
                 komentoAnnaTagi();
             }
+                        
         }
 
     }
@@ -69,7 +78,9 @@ public class Komentorivi {
         io.print("---------------------------");
 
         io.print("Tallenna uusi lukuvinkki: T");
-        io.print("Listaa lukuvinkit: L");
+        io.print("Listaa kaikki lukuvinkit: L");
+        io.print("Listaa lukemattomat: U");
+        io.print("Listaa luetut: R");
         io.print("Merkkaa luetuksi: M");
         io.print("Poista lukuvinkki: P");
         io.print("Anna lukuvinkille tagi: A");
@@ -90,6 +101,35 @@ public class Komentorivi {
 
         io.print("");
     }
+    
+    
+    public void komentoListaaLukemattomat() throws SQLException, ParseException {
+        ArrayList<LukuVinkki> lista = lvdao.listaaLukemattomat();
+        io.print("...");
+        for (int i = 0; i < lista.size(); i++) {
+            io.print(lista.get(i).toString() + "\n");
+        }
+        if (lista.isEmpty()) {
+            io.print("Lukemattomia lukuvinkkejä ei löytynyt");
+        }
+
+        io.print("");
+    }
+    
+    
+    public void komentoListaaLuetut() throws SQLException, ParseException {
+        ArrayList<LukuVinkki> lista = lvdao.listaaLuetut();
+        io.print("...");
+        for (int i = 0; i < lista.size(); i++) {
+            io.print(lista.get(i).toString() + "\n");
+        }
+        if (lista.isEmpty()) {
+            io.print("Luettuja lukuvinkkejä ei löytynyt");
+        }
+
+        io.print("");
+    }
+          
 
 
     public void komentoTallenna() throws SQLException {
