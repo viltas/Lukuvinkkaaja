@@ -216,6 +216,36 @@ public class KomentoriviTest {
         }
         assertTrue(ok);
     }
+    
+    @Test
+    public void annaLukuvinkilleTagiToimii() throws SQLException, ParseException {
+        IOStub io = new IOStub("T", "Otsikko", "linkki.fi","A","1","tagi","Q");
+        new Komentorivi(io, tietokanta).start();
+        boolean ok = false;
+        for(String s : io.outputs) {
+        if(s.contains("Tagi lisätty!")) {
+            ok = true;
+        }
+        
+        }
+        
+        assertTrue(ok);
+    }
+    
+    @Test
+    public void annaLukuvinkilleTagiEiToimiHuonollaInputilla() throws SQLException, ParseException {
+        IOStub io = new IOStub("T","Otsikko","linkki.fi","A","yksi","tagi","Q");
+        new Komentorivi(io, tietokanta).start();
+        boolean ok = false;
+        for(String s : io.outputs) {
+            if(s.contains("Anna kunnollinen id")) {
+                ok = true;
+            }
+        }
+        
+        assertTrue(ok);
+        
+    }
 
 //      @Test
 //    public void listanTyhjentaminenToimii() throws SQLException, ParseException {

@@ -192,11 +192,11 @@ public class Komentorivi {
         try {
             int id = Integer.parseInt(io.nextString());
             
-            io.print("Kirjoita tagi: ");
+            io.print("Kirjoita tagi (jos annat useamman, erota tagit pilkulla): ");
             String tagi = io.nextString();
             lvdao.annaTagi(id, tagi);
             
-            io.print("Lukuvinkille " + id + " on annettu tagi " +tagi);
+            io.print("Tagi lisätty!");
             
         } catch (NumberFormatException e) {
             io.print("Anna kunnollinen id");

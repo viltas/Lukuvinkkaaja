@@ -170,13 +170,22 @@ public class Stepdefs {
         assertTrue(io.outputs.contains("Artikkeli " + id + " merkitty luetuksi!"));
     }
     
-
+    @When("Kayttaja antaa lukuvinkille {string} tagin {string}")
+    public void kayttajaAntaaLukuvinkilleTagin(String string, String string2) throws SQLException, ParseException {
+        for(String s: io.outputs) {
+            if(s.contains(string)) {
+                id = s.substring(0, s.indexOf(" "));
+            }
+        }
+        
+        io = new IOStub("A", id, string2, "Q");
+        komentorivi = new Komentorivi(io, tietokanta);
+        komentorivi.start();
+        
+    }
     
 
 
-
-
-    
     @After
     public void restoreStreams() {
         File f = new File("testikanta.db");
