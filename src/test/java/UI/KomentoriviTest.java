@@ -98,6 +98,30 @@ public class KomentoriviTest {
         assertEquals(false, luettu);
     }
     
+            @Test
+    public void lukemattomienListausKomentoToimiiKunEiLukemattomia() throws SQLException, ParseException {
+        IOStub io = new IOStub("T", "Eka","eka.fi", "M", "1", "T", "Toka","toka.fi","M","2", "U","Q");
+        new Komentorivi(io, tietokanta).start();
+        boolean ekaLukematta = true;
+        boolean tokaLukematta = true;
+        boolean ilmoitus = false;
+        for (String s : io.outputs) {
+            if (s.contains("Eka (eka.fi) [lisätty:  "+ LocalDate.now())) {
+                ekaLukematta = false;
+            }
+            if (s.contains("Toka (toka.fi) [lisätty:  "+ LocalDate.now())) {
+                tokaLukematta = false;
+            }
+            if (s.contains("Lukemattomia lukuvinkkejä ei löytynyt")) {
+                ilmoitus = true;
+            }
+        }
+        
+        assertEquals(true, ekaLukematta);
+        assertEquals(true, tokaLukematta);
+        assertEquals(true, ilmoitus);
+    }
+    
         @Test
     public void luettujenListausKomentoToimii() throws SQLException, ParseException {
         IOStub io = new IOStub("T", "Eka","eka.fi","T", "Toka","toka.fi","M","2", "R","Q");
@@ -115,6 +139,30 @@ public class KomentoriviTest {
         
         assertEquals(false, lukematta);
         assertEquals(true, luettu);
+    }
+    
+            @Test
+    public void luettujenListausKomentoToimiiKunEiLuettuja() throws SQLException, ParseException {
+        IOStub io = new IOStub("T", "Eka","eka.fi","T", "Toka","toka.fi", "R","Q");
+        new Komentorivi(io, tietokanta).start();
+        boolean ekaLukematta = true;
+        boolean tokaLukematta = true;
+        boolean ilmoitus = false;
+        for (String s : io.outputs) {
+            if (s.contains("Eka (eka.fi) [lisätty:  "+ LocalDate.now())) {
+                ekaLukematta = false;
+            }
+            if (s.contains("Toka (toka.fi) [lisätty:  "+ LocalDate.now())) {
+                tokaLukematta = false;
+            }
+            if (s.contains("Luettuja lukuvinkkejä ei löytynyt")) {
+                ilmoitus = true;
+            }
+        }
+        
+        assertEquals(true, ekaLukematta);
+        assertEquals(true, tokaLukematta);
+        assertEquals(true, ilmoitus);
     }
 
     @Test

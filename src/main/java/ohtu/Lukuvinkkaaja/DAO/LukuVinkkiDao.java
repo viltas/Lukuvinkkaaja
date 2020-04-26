@@ -99,15 +99,12 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
                 LukuVinkki temp = new LukuVinkki(otsikko, osoite);
                 temp.setId(id);
                 temp.setTagi(tagi);
-                temp.setOnkoluettu(rs.getBoolean("luettu"));
+                
                 temp.setLisatty(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                if (temp.isOnkoluettu()) {
-                    java.util.Date luettu = dateFormat.parse(rs.getString("luettu"));    
-                    temp.setLuettu(luettu.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                }
                 
                 
-                lista.add(temp); // tarvitsee muokkausta oikeaan muotoon
+                
+                lista.add(temp); 
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -129,7 +126,7 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
                 int id = rs.getInt("id");
                 String otsikko = rs.getString("otsikko");
                 String osoite = rs.getString("url");
-                String tagi = rs.getString("tagi");
+                String tagi = rs.getString("tagi");              
                 LukuVinkki temp = new LukuVinkki(otsikko, osoite);
                 temp.setId(id);
                 temp.setTagi(tagi);
@@ -141,7 +138,7 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
                 }
                 
                 
-                lista.add(temp); // tarvitsee muokkausta oikeaan muotoon
+                lista.add(temp); 
             }
         } catch (ParseException e) {
             e.printStackTrace();
