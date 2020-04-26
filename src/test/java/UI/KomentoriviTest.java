@@ -77,6 +77,45 @@ public class KomentoriviTest {
         assertEquals(true, ok);
         assertEquals(true, ok2);
     }
+    
+    
+        @Test
+    public void lukemattomienListausKomentoToimii() throws SQLException, ParseException {
+        IOStub io = new IOStub("T", "Eka","eka.fi","T", "Toka","toka.fi","M","2", "U","Q");
+        new Komentorivi(io, tietokanta).start();
+        boolean lukematta = false;
+        boolean luettu = false;
+        for (String s : io.outputs) {
+            if (s.contains("Eka (eka.fi) [lisätty:  "+ LocalDate.now())) {
+                lukematta = true;
+            }
+            if (s.contains("Toka (toka.fi) [lisätty:  "+ LocalDate.now())) {
+                luettu = true;
+            }
+        }
+        
+        assertEquals(true, lukematta);
+        assertEquals(false, luettu);
+    }
+    
+        @Test
+    public void luettujenListausKomentoToimii() throws SQLException, ParseException {
+        IOStub io = new IOStub("T", "Eka","eka.fi","T", "Toka","toka.fi","M","2", "R","Q");
+        new Komentorivi(io, tietokanta).start();
+        boolean lukematta = false;
+        boolean luettu = false;
+        for (String s : io.outputs) {
+            if (s.contains("Eka (eka.fi) [lisätty:  "+ LocalDate.now())) {
+                lukematta = true;
+            }
+            if (s.contains("Toka (toka.fi) [lisätty:  "+ LocalDate.now())) {
+                luettu = true;
+            }
+        }
+        
+        assertEquals(false, lukematta);
+        assertEquals(true, luettu);
+    }
 
     @Test
     public void poistaminenToimii() throws SQLException, ParseException {
