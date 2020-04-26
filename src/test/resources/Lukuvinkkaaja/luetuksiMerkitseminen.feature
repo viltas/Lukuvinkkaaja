@@ -11,5 +11,5 @@ Feature: Lukuvinkki voidaan merkitä luetuksi ja lukuajankohta tallentuu
     Given Tietokanta on olemassa
     When  Kayttaja lisaa lukuvinkin "Luettava" ja linkin ""
     And   Ohjelma käynnistetään
-    And   Kayttaja merkka lukuvinkin "Luettava" luetuksi
+    And   Kayttaja merkkaa lukuvinkin "Luettava" luetuksi
     Then  Lukuvinkki "Luettava" on luettu

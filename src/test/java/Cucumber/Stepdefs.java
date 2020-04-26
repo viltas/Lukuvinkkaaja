@@ -53,6 +53,21 @@ public class Stepdefs {
         komentorivi = new Komentorivi(io, tietokanta);
         komentorivi.start();
     }
+    
+    @When("Lukemattomat listataan")
+    public void lukemattomatListataan() throws SQLException, ParseException {
+        io = new IOStub("U", "Q");
+        komentorivi = new Komentorivi(io, tietokanta);
+        komentorivi.start();
+    }
+    
+    
+    @When("Luetut listataan")
+    public void luetutListataan() throws SQLException, ParseException {
+        io = new IOStub("R", "Q");
+        komentorivi = new Komentorivi(io, tietokanta);
+        komentorivi.start();
+    }
 
     @Then("Lisaysaika on nakyvilla")
     public void lisaysaikaOnNakyvilla() {
@@ -137,8 +152,8 @@ public class Stepdefs {
         
     }
 
-    @When("Kayttaja merkka lukuvinkin {string} luetuksi")
-    public void kayttajaMerkkaLukuvinkinLuetuksi(String string) throws SQLException, ParseException {
+    @When("Kayttaja merkkaa lukuvinkin {string} luetuksi")
+    public void kayttajaMerkkaaLukuvinkinLuetuksi(String string) throws SQLException, ParseException {
         for (String s : io.outputs) {
             if (s.contains(string)) {
                 id = s.substring(0, s.indexOf(" "));
