@@ -184,6 +184,19 @@ public class Stepdefs {
         
     }
     
+    @Then("Lukuvinkilla on tagi {string}")
+    public void lukuvinkillaOnTagi(String string) {       
+        boolean b = false;
+        for (String s : io.outputs) {
+            if (s.contains(string)) {
+                b = true;
+            }
+        }
+        
+        assertTrue(b);    
+    }
+        
+    
 
 
     @After
