@@ -206,6 +206,8 @@ public class KomentoriviTest {
         }
         assertTrue(ok);
     }
+
+        
     
     @Test
     public void annaLukuvinkilleTagiToimii() throws SQLException, ParseException {
@@ -213,7 +215,7 @@ public class KomentoriviTest {
         new Komentorivi(io, tietokanta).start();
         boolean ok = false;
         for(String s : io.outputs) {
-        if(s.contains("Tagi lisätty!")) {
+        if(s.contains("Tagi(t) lisätty!")) {
             ok = true;
         }
         
