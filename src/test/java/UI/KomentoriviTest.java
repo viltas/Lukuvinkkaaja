@@ -31,7 +31,7 @@ public class KomentoriviTest {
 
     @Test
     public void tallenninToimii() {
-        
+        ////todo
 
     }
 
@@ -60,22 +60,19 @@ public class KomentoriviTest {
 
 
     @Test
-    public void listausKomentoToimii() throws SQLException, ParseException {
-        IOStub io = new IOStub("T", "Otsikko","linkki.fi","T", "Toinen","toka.fi","L","Q");
+    public void listausKomentoToimiiTyhjallaListalla() throws SQLException, ParseException {
+        IOStub io = new IOStub("Q");
         new Komentorivi(io, tietokanta).start();
         boolean ok = false;
-        boolean ok2 = false;
         for (String s : io.outputs) {
-            if (s.contains("Otsikko (linkki.fi) [lisätty:  "+ LocalDate.now())) {
+
+            if (s.contains("Et ole vielä tallentanut lukuvinkkejä")) {
                 ok = true;
-            }
-            if (s.contains("Toinen (toka.fi) [lisätty:  "+ LocalDate.now())) {
-                ok2 = true;
             }
         }
         
         assertEquals(true, ok);
-        assertEquals(true, ok2);
+
     }
     
     
@@ -122,7 +119,7 @@ public class KomentoriviTest {
         assertEquals(true, ilmoitus);
     }
     
-        @Test
+    @Test
     public void luettujenListausKomentoToimii() throws SQLException, ParseException {
         IOStub io = new IOStub("T", "Eka","eka.fi","T", "Toka","toka.fi","M","2", "R","Q");
         new Komentorivi(io, tietokanta).start();
@@ -141,7 +138,7 @@ public class KomentoriviTest {
         assertEquals(true, luettu);
     }
     
-            @Test
+    @Test
     public void luettujenListausKomentoToimiiKunEiLuettuja() throws SQLException, ParseException {
         IOStub io = new IOStub("T", "Eka","eka.fi","T", "Toka","toka.fi", "R","Q");
         new Komentorivi(io, tietokanta).start();
@@ -247,6 +244,11 @@ public class KomentoriviTest {
         
     }
 
+
+    @Test
+    public void tulostajaToimii() {
+    }
+
 //      @Test
 //    public void listanTyhjentaminenToimii() throws SQLException, ParseException {
 //        IOStub io = new IOStub("L", "Q");
@@ -260,6 +262,8 @@ public class KomentoriviTest {
 //        }
 //        assertTrue(ok);
 //    }
+
+
     
         
     @After

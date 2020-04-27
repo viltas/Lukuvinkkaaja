@@ -7,7 +7,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
-import java.util.List;
 
 import java.util.*;
 import java.sql.*;
@@ -73,7 +72,7 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
                 }
                 
                 
-                lista.add(temp); // tarvitsee muokkausta oikeaan muotoon
+                lista.add(temp);
             }
         } catch (ParseException e) {
             e.printStackTrace();
