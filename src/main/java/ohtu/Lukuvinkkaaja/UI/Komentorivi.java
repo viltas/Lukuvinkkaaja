@@ -136,7 +136,7 @@ public class Komentorivi {
         String linkki = io.nextString();
 
         tallennin(otsikko, linkki);
-
+        
         io.print("Lukuvinkki tallennettu!\n\n");
     }
 
@@ -181,7 +181,7 @@ public class Komentorivi {
             String tagi = io.nextString();
             lvdao.annaTagi(id, tagi);
 
-            io.print("Tagi lisätty!");
+            io.print("Tagi(t) lisätty!");
 
         } catch (NumberFormatException e) {
             io.print("Anna kunnollinen id");

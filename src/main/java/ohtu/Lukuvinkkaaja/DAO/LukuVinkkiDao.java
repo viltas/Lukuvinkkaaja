@@ -134,9 +134,17 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         stmt.setString(3, lukuvinkki.getURL());
         stmt.setString(4, strPaivays);
         stmt.setString(5, "0");
+        
+        if(lukuvinkki.getURL().contains("youtube")){
+            stmt.setString(7, "video");
+        }
+        
+        else if(lukuvinkki.getURL().contains("doi")){
+            stmt.setString(7, "julkaisu");
+        }
+
 
         stmt.execute();
-
         stmt.close();
 
 
