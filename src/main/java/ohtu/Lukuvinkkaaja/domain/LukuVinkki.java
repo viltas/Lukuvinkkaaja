@@ -85,7 +85,7 @@ public class LukuVinkki {
         
         String tagiTeksti = "";
         if(this.tagi != null) {
-            tagiTeksti = (", (tagi: " + getTagi() + ")");
+            tagiTeksti = (", (tagi(t): " + getTagi() + ")");
         }
         return this.id + " " + this.otsikko +" ("+ this.URL + ") " + "[lisätty:  "+ this.lisatty + lukuteksti +"] " + tagiTeksti;
     }
