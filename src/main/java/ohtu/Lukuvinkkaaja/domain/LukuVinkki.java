@@ -1,18 +1,7 @@
 package ohtu.Lukuvinkkaaja.domain;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author iilkka
- */
 public class LukuVinkki {
     private int id;
     private String otsikko;
@@ -20,6 +9,7 @@ public class LukuVinkki {
     private boolean onkoluettu;
     private LocalDate lisatty;
     private LocalDate luettu;
+    private String tagi;
     
     public LukuVinkki(String otsikko, String URL) {
         if (otsikko == null || otsikko.isEmpty()) {
@@ -29,6 +19,7 @@ public class LukuVinkki {
         this.otsikko = otsikko;
         this.URL = URL;
         this.lisatty = pvm;
+        
        
     }
     
@@ -76,19 +67,14 @@ public class LukuVinkki {
         this.luettu = luettu;
     }
     
+    public String getTagi() {
+        return tagi;
+    }
     
-    
-    // public LukuVinkki(Kirja kirja) {
-     
-    // }
-    
-    // public LukuVinkki(Podcast podcast) {
-        
-    // }
-    
-    // public LukuVinkki(Video video) {
-        
-    // }
+    public void setTagi(String tagi) {
+        this.tagi = tagi;
+    }
+   
     
     @Override
     public String toString() {
@@ -96,7 +82,12 @@ public class LukuVinkki {
         if (this.onkoluettu) {
             lukuteksti = (", (luettu: " + this.luettu + ")");
         }
-        return this.id + " " + this.otsikko +" ("+ this.URL + ") " + "[lisätty:  "+ this.lisatty + lukuteksti +"] ";
+        
+        String tagiTeksti = "";
+        if(this.tagi != null) {
+            tagiTeksti = (", (tagi(t): " + getTagi() + ")");
+        }
+        return this.id + " " + this.otsikko +" ("+ this.URL + ") " + "[lisätty:  "+ this.lisatty + lukuteksti +"] " + tagiTeksti;
     }
 
     public void setId(int id) {

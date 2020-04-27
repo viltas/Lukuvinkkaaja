@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package domain;
 
 import ohtu.Lukuvinkkaaja.domain.LukuVinkki;
@@ -15,10 +11,7 @@ import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author iilkka
- */
+
 public class LukuVinkkiTest {
 
     LukuVinkki lukuVinkki;
@@ -87,6 +80,12 @@ public class LukuVinkkiTest {
         lukuVinkki.setLuettu(LocalDate.now());
         assertEquals(LocalDate.now(), lukuVinkki.getLuettu());
 
+    }
+
+    @Test
+    public void taginTulostaminenToimiitoStringissa() {
+        lukuVinkki.setTagi("tagi");
+        assertTrue(lukuVinkki.toString().contains("tagi"));
     }
 
 
