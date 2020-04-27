@@ -4,7 +4,7 @@ Feature: Lukuvinkille voidaan antaa tagi
     When  Kayttaja lisaa lukuvinkin "Kodarit" ja linkin "www.kodarit.fi"    
     And   Ohjelma käynnistetään
     And   Kayttaja antaa lukuvinkille "Kodarit" tagin "web"
-    Then  Tulostuu "Tagi lisätty!"
+    Then  Tulostuu Tagi(t) lisätty!
 
     Scenario: Automaattinen video tagin lisäys urlin perusteella
     Given Tietokanta on olemassa
