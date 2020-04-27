@@ -154,9 +154,12 @@ public class Stepdefs {
 
     @When("Kayttaja merkkaa lukuvinkin {string} luetuksi")
     public void kayttajaMerkkaaLukuvinkinLuetuksi(String string) throws SQLException, ParseException {
-        for (String s : io.outputs) {
-            if (s.contains(string)) {
-                id = s.substring(0, s.indexOf(" "));
+        ArrayList<String> lista = io.outputs;
+
+        for(int i = 0; i < lista.size(); i++) {
+            if(lista.get(i).contains(string)) {
+                String apu = lista.get(i-1);
+                id = apu.substring(apu.lastIndexOf(" ") + 1);
             }
         }
         
@@ -172,9 +175,12 @@ public class Stepdefs {
     
     @When("Kayttaja antaa lukuvinkille {string} tagin {string}")
     public void kayttajaAntaaLukuvinkilleTagin(String string, String string2) throws SQLException, ParseException {
-        for(String s: io.outputs) {
-            if(s.contains(string)) {
-                id = s.substring(0, s.indexOf(" "));
+        ArrayList<String> lista = io.outputs;
+
+        for(int i = 0; i < lista.size(); i++) {
+            if(lista.get(i).contains(string)) {
+                String apu = lista.get(i-1);
+                id = apu.substring(apu.lastIndexOf(" ") + 1);
             }
         }
         

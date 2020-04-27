@@ -146,12 +146,6 @@ public class Komentorivi {
 
     }
 
-    // TODO
-    // public Object haeListalta( int i) {
-    // throw new UnsupportedOperationException("Not supported yet."); //To change
-    // body //of generated methods, choose Tools | Templates.
-    // }
-
     private void komentoMerkkaaLuetuksi() throws SQLException {
         io.print("Anna luetun artikkelin id: ");
         try {
@@ -209,7 +203,6 @@ public class Komentorivi {
     public void tulostaja(ArrayList<LukuVinkki> lista) {
 
         for (LukuVinkki lv : lista) {
-            io.print("\n");
             io.print("----------");
             io.print("ID: " + lv.getId());
             io.print("Otsikko: " + lv.getOtsikko());

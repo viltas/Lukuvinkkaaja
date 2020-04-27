@@ -50,13 +50,6 @@ public class KomentoriviTest {
         assertEquals("Lukuvinkki tallennettu!\n\n", io.outputs.get(io.outputs.size()-2));
     }
 
-    //unsupported
-//    @Test
-//    public void listaltaHakuToimii() throws SQLException {
-//        komentorivi.tallennin("otsikko", "linkki.fi");
-//        String expected = "otsikko" +" "+ "linkki.fi" +" "+ LocalDate.now();
-//        assertTrue(komentorivi.haeListalta(0).toString().contains(expected));
-//    }
 
 
     @Test
@@ -248,20 +241,6 @@ public class KomentoriviTest {
     @Test
     public void tulostajaToimii() {
     }
-
-//      @Test
-//    public void listanTyhjentaminenToimii() throws SQLException, ParseException {
-//        IOStub io = new IOStub("L", "Q");
-//        new Komentorivi(io, tietokanta).start();
-//        komentorivi.tyhjennaLista();
-//        boolean ok = false;
-//        for (String s : io.outputs) {
-//            if (s.contains("Et ole vielä tallentanut lukuvinkkejä")) {
-//                ok = true;
-//            }    
-//        }
-//        assertTrue(ok);
-//    }
 
 
     

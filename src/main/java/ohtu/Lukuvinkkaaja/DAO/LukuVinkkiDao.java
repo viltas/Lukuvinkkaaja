@@ -21,30 +21,6 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         this.tietokanta = tietokanta;
     }
 
-    @Override
-    public LukuVinkki etsiYKsi(Integer key) throws SQLException {
-        Connection conn = tietokanta.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Lukuvinkki WHERE id = ?");
-        stmt.setInt(1, key);
-
-        ResultSet rs = stmt.executeQuery();
-        boolean hasOne = rs.next();
-        if (!hasOne) {
-            return null;
-        }
-
-        // LukuVinkki lv = new LukuVinkki(rs.getInt("id"),
-        // rs.getString("otsikko"),rs.getString("URL"),rs.getDate("lisatty"),
-        // rs.getBoolean("luettu"));
-
-        stmt.close();
-        rs.close();
-
-        conn.close();
-
-        // return lv;
-        return null;
-    }
 
     @Override
     public ArrayList<LukuVinkki> listaaKaikki() throws SQLException {
