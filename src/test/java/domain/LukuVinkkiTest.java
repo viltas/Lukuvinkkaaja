@@ -82,6 +82,12 @@ public class LukuVinkkiTest {
 
     }
 
+    @Test
+    public void taginTulostaminenToimiitoStringissa() {
+        lukuVinkki.setTagi("tagi");
+        assertTrue(lukuVinkki.toString().contains("tagi"));
+    }
+
 
 
 

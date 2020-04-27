@@ -49,10 +49,7 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it,
-                    exclude: ['ohtu/Lukuvinkkaaja/domain/Kirja.*',
-                              'ohtu/Lukuvinkkaaja/domain/Podcast.*', 
-                              'ohtu/Lukuvinkkaaja/domain/Video.*', 
-                              'ohtu/Lukuvinkkaaja/Main.*', 
+                    exclude: ['ohtu/Lukuvinkkaaja/Main.*', 
                               'ohtu/Lukuvinkkaaja/UI/KomentoriviIO.*', 
                               ])
         }))

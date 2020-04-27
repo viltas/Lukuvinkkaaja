@@ -239,14 +239,7 @@ public class KomentoriviTest {
         
     }
 
-
-    @Test
-    public void tulostajaToimii() {
-    }
-
-
-    
-        
+      
     @After
     public void tearDown() {
         File f = new File("testikanta.db");

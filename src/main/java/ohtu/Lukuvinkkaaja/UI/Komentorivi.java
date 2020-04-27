@@ -189,12 +189,6 @@ public class Komentorivi {
         }
     }
 
-    public void tyhjennaLista() throws SQLException {
-        ArrayList<LukuVinkki> lista = lvdao.listaaKaikki();
-        for (LukuVinkki lukuVinkki : lista) {
-            lvdao.poista(lukuVinkki.getId());
-        }
-    }
 
     public void alustaTietokanta() throws SQLException {
         lvdao.luoTaulu();

@@ -21,7 +21,6 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         this.tietokanta = tietokanta;
     }
 
-
     @Override
     public ArrayList<LukuVinkki> listaaKaikki() throws SQLException {
         ArrayList<LukuVinkki> lista = new ArrayList<>();
@@ -43,26 +42,27 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
                 temp.setOnkoluettu(rs.getBoolean("luettu"));
                 temp.setLisatty(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 if (temp.isOnkoluettu()) {
-                    java.util.Date luettu = dateFormat.parse(rs.getString("luettu"));    
+                    java.util.Date luettu = dateFormat.parse(rs.getString("luettu"));
                     temp.setLuettu(luettu.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 }
-                
-                
+
                 lista.add(temp);
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
         return lista;
     }
-    
-@Override
+
+    @Override
     public ArrayList<LukuVinkki> listaaLukemattomat() throws SQLException {
         ArrayList<LukuVinkki> lista = new ArrayList<>();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try (Connection conn = tietokanta.getConnection();
-                ResultSet rs = conn.prepareStatement("SELECT * FROM Lukuvinkki WHERE Onkoluettu = '0' ORDER BY lisatty DESC").executeQuery()) {
+                ResultSet rs = conn
+                        .prepareStatement("SELECT * FROM Lukuvinkki WHERE Onkoluettu = '0' ORDER BY lisatty DESC")
+                        .executeQuery()) {
 
             while (rs.next()) {
                 java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
@@ -74,26 +74,26 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
                 LukuVinkki temp = new LukuVinkki(otsikko, osoite);
                 temp.setId(id);
                 temp.setTagi(tagi);
-                
+
                 temp.setLisatty(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                
-                
-                
-                lista.add(temp); 
+
+                lista.add(temp);
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return lista;
     }
-    
+
     @Override
     public ArrayList<LukuVinkki> listaaLuetut() throws SQLException {
         ArrayList<LukuVinkki> lista = new ArrayList<>();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try (Connection conn = tietokanta.getConnection();
-                ResultSet rs = conn.prepareStatement("SELECT * FROM Lukuvinkki WHERE Onkoluettu = '1' ORDER BY lisatty DESC").executeQuery()) {
+                ResultSet rs = conn
+                        .prepareStatement("SELECT * FROM Lukuvinkki WHERE Onkoluettu = '1' ORDER BY lisatty DESC")
+                        .executeQuery()) {
 
             while (rs.next()) {
                 java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
@@ -101,26 +101,24 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
                 int id = rs.getInt("id");
                 String otsikko = rs.getString("otsikko");
                 String osoite = rs.getString("url");
-                String tagi = rs.getString("tagi");              
+                String tagi = rs.getString("tagi");
                 LukuVinkki temp = new LukuVinkki(otsikko, osoite);
                 temp.setId(id);
                 temp.setTagi(tagi);
                 temp.setOnkoluettu(rs.getBoolean("luettu"));
                 temp.setLisatty(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 if (temp.isOnkoluettu()) {
-                    java.util.Date luettu = dateFormat.parse(rs.getString("luettu"));    
+                    java.util.Date luettu = dateFormat.parse(rs.getString("luettu"));
                     temp.setLuettu(luettu.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 }
-                
-                
-                lista.add(temp); 
+
+                lista.add(temp);
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return lista;
     }
-    
 
     @Override
     public void tallenna(LukuVinkki lukuvinkki) throws SQLException {
@@ -134,30 +132,30 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         stmt.setString(3, lukuvinkki.getURL());
         stmt.setString(4, strPaivays);
         stmt.setString(5, "0");
-        
-        if(lukuvinkki.getURL().contains("youtube")){
+
+        if (lukuvinkki.getURL().contains("youtube")) {
             stmt.setString(7, "video");
         }
-        
-        else if(lukuvinkki.getURL().contains("doi")){
+
+        else if (lukuvinkki.getURL().contains("doi")) {
             stmt.setString(7, "julkaisu");
         }
-
 
         stmt.execute();
         stmt.close();
 
-
     }
 
+    // päivittää lukemattoman luetuksi tietokannassa
     @Override
     public void paivita(int id) throws SQLException {
         Connection conn = tietokanta.getConnection();
         java.util.Date paivays = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strPaivays = dateFormat.format(paivays);
-        PreparedStatement stmt = conn.prepareStatement("UPDATE lukuvinkki SET onkoluettu = ?, luettu = ?  WHERE id = ?");
-        
+        PreparedStatement stmt = conn
+                .prepareStatement("UPDATE lukuvinkki SET onkoluettu = ?, luettu = ?  WHERE id = ?");
+
         stmt.setBoolean(1, true);
         stmt.setString(2, strPaivays);
         stmt.setInt(3, id);
@@ -175,24 +173,25 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         stmt.setInt(1, key);
         stmt.executeUpdate();
 
-        stmt.close(); 
+        stmt.close();
         conn.close();
 
     }
-    
+
     @Override
     public void annaTagi(int id, String tagi) throws SQLException {
         Connection conn = tietokanta.getConnection();
         PreparedStatement stmt = conn.prepareStatement("UPDATE lukuvinkki SET tagi = ? WHERE id = ?");
-        
+
         stmt.setString(1, tagi);
         stmt.setInt(2, id);
         stmt.executeUpdate();
-        
+
         stmt.close();
         conn.close();
-        
+
     }
+
 
     public void luoTaulu() throws SQLException {
         String sqlCreate = "CREATE TABLE IF NOT EXISTS Lukuvinkki"
@@ -209,4 +208,5 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
         stmt.execute();
 
     }
+
 }
