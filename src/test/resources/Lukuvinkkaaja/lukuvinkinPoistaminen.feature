@@ -8,6 +8,8 @@ Feature: Lukuvinkin voi poistaa
     Then  Lukuvinkki "Poistettava" on poistettu
     
 
+
+
  
 
  	
