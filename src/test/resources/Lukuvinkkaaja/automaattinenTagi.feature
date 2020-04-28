@@ -12,5 +12,3 @@ Feature: Automaattinen tagien lisäys urlin perusteella
     And Ohjelma käynnistetään
     Then Lukuvinkilla on tagi "julkaisu"
 
-
-

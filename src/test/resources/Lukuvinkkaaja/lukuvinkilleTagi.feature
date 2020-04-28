@@ -6,4 +6,3 @@ Feature: Lukuvinkille voidaan antaa tagi
     And   Kayttaja antaa lukuvinkille "Kodarit" tagin "web"
     Then  Tulostuu "Tagi(t) lisätty!"
 
-
