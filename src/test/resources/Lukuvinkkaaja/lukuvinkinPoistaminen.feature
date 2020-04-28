@@ -6,7 +6,9 @@ Feature: Lukuvinkin voi poistaa
     And   Ohjelma käynnistetään
     And   Kayttaja poistaa lukuvinkin "Poistettava"
     Then  Lukuvinkki "Poistettava" on poistettu
-     
+    
+
+ 
 
  	
 
