@@ -60,40 +60,7 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try (Connection conn = tietokanta.getConnection();
-                ResultSet rs = conn
-                        .prepareStatement("SELECT * FROM Lukuvinkki WHERE Onkoluettu = '0' ORDER BY lisatty DESC")
-                        .executeQuery()) {
-
-            while (rs.next()) {
-                java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
-
-                int id = rs.getInt("id");
-                String otsikko = rs.getString("otsikko");
-                String osoite = rs.getString("url");
-                String tagi = rs.getString("tagi");
-                LukuVinkki temp = new LukuVinkki(otsikko, osoite);
-                temp.setId(id);
-                temp.setTagi(tagi);
-
-                temp.setLisatty(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-
-                lista.add(temp);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return lista;
-    }
-
-    @Override
-    public ArrayList<LukuVinkki> listaaLuetut() throws SQLException {
-        ArrayList<LukuVinkki> lista = new ArrayList<>();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try (Connection conn = tietokanta.getConnection();
-                ResultSet rs = conn
-                        .prepareStatement("SELECT * FROM Lukuvinkki WHERE Onkoluettu = '1' ORDER BY lisatty DESC")
-                        .executeQuery()) {
+                ResultSet rs = conn.prepareStatement("SELECT * FROM Lukuvinkki WHERE OnkoLuettu = '0' ORDER BY lisatty DESC").executeQuery()) {
 
             while (rs.next()) {
                 java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
@@ -115,7 +82,40 @@ public class LukuVinkkiDao implements Dao<LukuVinkki, Integer> {
                 lista.add(temp);
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
+        }
+        return lista;
+    }
+
+    @Override
+    public ArrayList<LukuVinkki> listaaLuetut() throws SQLException {
+        ArrayList<LukuVinkki> lista = new ArrayList<>();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try (Connection conn = tietokanta.getConnection();
+                ResultSet rs = conn.prepareStatement("SELECT * FROM Lukuvinkki WHERE OnkoLuettu = '1' ORDER BY lisatty DESC").executeQuery()) {
+
+            while (rs.next()) {
+                java.util.Date lisatty = dateFormat.parse(rs.getString("lisatty"));
+
+                int id = rs.getInt("id");
+                String otsikko = rs.getString("otsikko");
+                String osoite = rs.getString("url");
+                String tagi = rs.getString("tagi");
+                LukuVinkki temp = new LukuVinkki(otsikko, osoite);
+                temp.setId(id);
+                temp.setTagi(tagi);
+                temp.setOnkoluettu(rs.getBoolean("luettu"));
+                temp.setLisatty(lisatty.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                if (temp.isOnkoluettu()) {
+                    java.util.Date luettu = dateFormat.parse(rs.getString("luettu"));
+                    temp.setLuettu(luettu.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                }
+
+                lista.add(temp);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace(System.err);
         }
         return lista;
     }
