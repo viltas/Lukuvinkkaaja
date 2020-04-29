@@ -21,3 +21,8 @@ Pääset CircleCI ja codecov raportteihin klikkaamalla badgesta.
 - Hyväksymiskriteerit tavoitettu
 - Hyväksymiskriteerit testattu
 - User story valmis käyttöönottoon
+
+
+### Loppuraportti
+
+[Linkki loppuraporttiin](https://docs.google.com/document/d/1HVPo8gYec4ZLKI9nAy72fRnOHkw1LQLe7XXDSsLeh9g/edit?usp=sharing)
