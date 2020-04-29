@@ -72,6 +72,7 @@ public class LukuVinkkiDaoTest {
 
     @Test
     public void luettujenListausEiPalautaMitaan() throws SQLException {
+        lvdao.luoTaulu();
         LukuVinkki temp = new LukuVinkki("Otsikko", "nettisivu.fi");
         lvdao.tallenna(temp);
         ArrayList<LukuVinkki> lista = lvdao.listaaLuetut();
