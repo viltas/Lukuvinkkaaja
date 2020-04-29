@@ -100,9 +100,7 @@ public class Komentorivi {
     public void komentoListaaLukemattomat() throws SQLException, ParseException {
         ArrayList<LukuVinkki> lista = lvdao.listaaLukemattomat();
         io.print("...");
-        for (int i = 0; i < lista.size(); i++) {
-            io.print(lista.get(i).toString() + "\n");
-        }
+        tulostaja(lista);
         if (lista.isEmpty()) {
             io.print("Lukemattomia lukuvinkkejä ei löytynyt");
         }
@@ -113,9 +111,7 @@ public class Komentorivi {
     public void komentoListaaLuetut() throws SQLException, ParseException {
         ArrayList<LukuVinkki> lista = lvdao.listaaLuetut();
         io.print("...");
-        for (int i = 0; i < lista.size(); i++) {
-            io.print(lista.get(i).toString() + "\n");
-        }
+        tulostaja(lista);
         if (lista.isEmpty()) {
             io.print("Luettuja lukuvinkkejä ei löytynyt");
         }

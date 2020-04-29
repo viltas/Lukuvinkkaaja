@@ -76,10 +76,10 @@ public class KomentoriviTest {
         boolean lukematta = false;
         boolean luettu = false;
         for (String s : io.outputs) {
-            if (s.contains("Eka (eka.fi) [lisätty:  "+ LocalDate.now())) {
+            if (s.contains("Eka")) {
                 lukematta = true;
             }
-            if (s.contains("Toka (toka.fi) [lisätty:  "+ LocalDate.now())) {
+            if (s.contains("Toka")) {
                 luettu = true;
             }
         }
@@ -96,10 +96,10 @@ public class KomentoriviTest {
         boolean tokaLukematta = true;
         boolean ilmoitus = false;
         for (String s : io.outputs) {
-            if (s.contains("Eka (eka.fi) [lisätty:  "+ LocalDate.now())) {
+            if (s.contains("Eka")) {
                 ekaLukematta = false;
             }
-            if (s.contains("Toka (toka.fi) [lisätty:  "+ LocalDate.now())) {
+            if (s.contains("Toka")) {
                 tokaLukematta = false;
             }
             if (s.contains("Lukemattomia lukuvinkkejä ei löytynyt")) {
@@ -119,10 +119,10 @@ public class KomentoriviTest {
         boolean lukematta = false;
         boolean luettu = false;
         for (String s : io.outputs) {
-            if (s.contains("Eka (eka.fi) [lisätty:  "+ LocalDate.now())) {
+            if (s.contains("Eka")) {
                 lukematta = true;
             }
-            if (s.contains("Toka (toka.fi) [lisätty:  "+ LocalDate.now())) {
+            if (s.contains("Toka")) {
                 luettu = true;
             }
         }
@@ -139,10 +139,10 @@ public class KomentoriviTest {
         boolean tokaLukematta = true;
         boolean ilmoitus = false;
         for (String s : io.outputs) {
-            if (s.contains("Eka (eka.fi) [lisätty:  "+ LocalDate.now())) {
+            if (s.contains("Eka")) {
                 ekaLukematta = false;
             }
-            if (s.contains("Toka (toka.fi) [lisätty:  "+ LocalDate.now())) {
+            if (s.contains("Toka")) {
                 tokaLukematta = false;
             }
             if (s.contains("Luettuja lukuvinkkejä ei löytynyt")) {

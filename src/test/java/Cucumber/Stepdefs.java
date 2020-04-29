@@ -40,6 +40,8 @@ public class Stepdefs {
         komentorivi = new Komentorivi(io, tietokanta);
         komentorivi.start();
     }
+    
+    
 
     @Then("Syote hyvaksytaan")
     public void syoteHyvaksytaan() {
@@ -137,6 +139,8 @@ public class Stepdefs {
         
         assertTrue(b); 
     }
+    
+    
 
     @Then("Kaikilla vinkeillä on oma id")
     public void molemmillaVinkeillaOnUniikkiId() {
@@ -167,11 +171,34 @@ public class Stepdefs {
         komentorivi = new Komentorivi(io, tietokanta);
         komentorivi.start();      
     }
+    
+    
+        @When("Kayttaja poistaa lukuvinkin {string}")
+    public void kayttajaPoistaaLukuvinkin(String string) throws SQLException, ParseException {
+        ArrayList<String> lista = io.outputs;
+
+        for(int i = 0; i < lista.size(); i++) {
+            if(lista.get(i).contains(string)) {
+                String apu = lista.get(i-1);
+                id = apu.substring(apu.lastIndexOf(" ") + 1);
+            }
+        }
+        
+        io = new IOStub("P", id, "Q");
+        komentorivi = new Komentorivi(io, tietokanta);
+        komentorivi.start();      
+    }
 
     @Then("Lukuvinkki {string} on luettu")
     public void lukuvinkkiOnLuettu(String string) {
         assertTrue(io.outputs.contains("Artikkeli " + id + " merkitty luetuksi!"));
     }
+    
+        @Then("Lukuvinkki {string} on poistettu")
+    public void lukuvinkkiOnPoistettu(String string) {
+        assertTrue(io.outputs.contains("Lukuvinkki " + id + " poistettu."));
+    }
+    
     
     @When("Kayttaja antaa lukuvinkille {string} tagin {string}")
     public void kayttajaAntaaLukuvinkilleTagin(String string, String string2) throws SQLException, ParseException {

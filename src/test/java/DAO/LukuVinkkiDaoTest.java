@@ -106,7 +106,7 @@ public class LukuVinkkiDaoTest {
 
         stmt.setString(2, "otsikko");
         stmt.setString(3, "nettisivu.fi");
-        stmt.setString(4, "55");
+        stmt.setString(4, "2020-01-01");
         stmt.execute();
         stmt.close();
         lvdao.listaaKaikki();
@@ -121,7 +121,7 @@ public class LukuVinkkiDaoTest {
 
         stmt.setString(2, "otsikko");
         stmt.setString(3, "nettisivu.fi");
-        stmt.setString(4, "55");
+        stmt.setString(4, "2020-01-01");
         stmt.setBoolean(5,false);
         stmt.execute();
         stmt.close();
@@ -139,7 +139,7 @@ public class LukuVinkkiDaoTest {
 
         stmt.setString(2, "otsikko");
         stmt.setString(3, "nettisivu.fi");
-        stmt.setString(4, "55");
+        stmt.setString(4, "2020-01-01");
         stmt.setBoolean(5, true);
         stmt.execute();
         stmt.close();
