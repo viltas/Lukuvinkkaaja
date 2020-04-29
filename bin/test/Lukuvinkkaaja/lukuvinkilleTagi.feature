@@ -14,7 +14,7 @@ Feature: Lukuvinkille voidaan antaa tagi
 
     Scenario: Automaattinen julkaisu tagin lisäys urlin perusteella
     Given Tietokanta on olemassa
-    When Kayttaja lisaa lukuvinkin "julkaisulinkki" ja linkin "www.julkaisu.doi"
+    When Kayttaja lisaa lukuvinkin "artikkelilinkki" ja linkin "www.julkaisu.doi"
     And Ohjelma käynnistetään
     Then Lukuvinkilla on tagi "julkaisu"
 

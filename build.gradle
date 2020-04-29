@@ -41,6 +41,15 @@ run {
 standardInput = System.in
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 jacocoTestReport {
     reports {
         xml.enabled true
